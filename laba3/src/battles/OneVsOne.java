@@ -2,6 +2,7 @@ package battles;
 
 import druids.BasicDruid;
 
+/** Дуель між двома друїдами */
 public class OneVsOne {
 
     private BasicDruid robWhite, robBlack;
@@ -14,9 +15,11 @@ public class OneVsOne {
     public void battle(){
         robWhite.makeMove(robBlack);
         if (anybodyWon()) return;
+        System.out.println();
 
         robBlack.makeMove(robWhite);
         if (anybodyWon()) return;
+        System.out.println();
 
         battle();
     }

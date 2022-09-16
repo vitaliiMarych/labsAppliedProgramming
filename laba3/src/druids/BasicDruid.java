@@ -1,6 +1,7 @@
 package druids;
 import colors.TextColors;
 
+/** Абстракний клас друїда з якого всі наслідуються */
 public abstract class BasicDruid {
     //vars
     protected String name, type;
@@ -19,8 +20,9 @@ public abstract class BasicDruid {
     }
 
     public void gotDamage(int damage) {
-        System.out.println(TextColors.RED  + "Робот " + type + " " + name + " отрмав урон - " + damage);
-        health -= damage;
+        int realDamage = (int) (damage / defense);
+        System.out.println(TextColors.RED  + "Робот " + type + " " + name + " отримав урон - " + realDamage);
+        health -= realDamage;
         if (health > 0)
             System.out.println(TextColors.RED + this.toString() + TextColors.RESET);
 
@@ -29,12 +31,16 @@ public abstract class BasicDruid {
 
     }
 
-    public int Damage() {
+    public int Damage(double baff) {
+        int damage = (int) (baff * this.damage);
         System.out.println(TextColors.GREEN + "Робот " + type + " " + name + " завдає " + damage + " шкоди" + TextColors.RESET);
 
         return damage;
     }
 
+    public int Damage() {
+        return Damage(1);
+    }
 
 
     //overload
