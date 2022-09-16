@@ -1,7 +1,7 @@
 package druids;
 import colors.TextColors;
 
-public abstract class BasicDroid {
+public abstract class BasicDruid {
     //vars
     protected String name, type;
     protected int health, damage;
@@ -10,7 +10,7 @@ public abstract class BasicDroid {
 
 
     //functs
-    public void makeMove(BasicDroid enemy){
+    public void makeMove(BasicDruid enemy){
         enemy.gotDamage(this.Damage());
     }
 
