@@ -1,12 +1,12 @@
 package battles;
 
-import druids.BasicDroid;
+import druids.BasicDruid;
 
 public class OneVsOne {
 
-    private BasicDroid robWhite, robBlack;
+    private BasicDruid robWhite, robBlack;
 
-    public OneVsOne(BasicDroid r1, BasicDroid r2){
+    public OneVsOne(BasicDruid r1, BasicDruid r2){
         robWhite = r1;
         robBlack = r2;
     }
