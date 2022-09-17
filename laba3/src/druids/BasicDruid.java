@@ -1,7 +1,7 @@
 package druids;
 import colors.TextColors;
 
-/** Абстракний клас друїда з якого всі наслідуються */
+/** РђР±СЃС‚СЂР°РєС‚РЅРёР№ РєР»Р°СЃ РґСЂСѓС–РґС–РІ Р· СЏРєРѕРіРѕ РІСЃС– РїРѕС…РѕРґСЏС‚СЊ */
 public abstract class BasicDruid {
     //vars
     protected String name, type;
@@ -21,19 +21,19 @@ public abstract class BasicDruid {
 
     public void gotDamage(int damage) {
         int realDamage = (int) (damage / defense);
-        System.out.println(TextColors.RED  + "Робот " + type + " " + name + " отримав урон - " + realDamage);
+        System.out.println(TextColors.RED  + "Р РѕР±РѕС‚ " + type + " " + name + " РѕС‚СЂРёРјР°РІ СѓСЂРѕРЅ - " + realDamage);
         health -= realDamage;
         if (health > 0)
             System.out.println(TextColors.RED + this.toString() + TextColors.RESET);
 
         else
-            System.out.println(TextColors.RESET + "Робот " + type + " " + name + " помер");
+            System.out.println(TextColors.RESET + "Р РѕР±РѕС‚ " + type + " " + name + " РїРѕРјРµСЂ");
 
     }
 
     public int Damage(double baff) {
         int damage = (int) (baff * this.damage);
-        System.out.println(TextColors.GREEN + "Робот " + type + " " + name + " завдає " + damage + " шкоди" + TextColors.RESET);
+        System.out.println(TextColors.GREEN + "Р РѕР±РѕС‚ " + type + " " + name + " Р·Р°РІРґР°РІ " + damage + " С€РєРѕРґРё" + TextColors.RESET);
 
         return damage;
     }
@@ -46,7 +46,7 @@ public abstract class BasicDruid {
     //overload
     @Override
     public String toString() {
-        return "Робот " + type + " " + name + " має " + health + " hp ";
+        return "Р РѕР±РѕС‚ " + type + " " + name + " РјР°С” " + health + " hp ";
     }
 
 }

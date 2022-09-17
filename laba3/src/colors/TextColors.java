@@ -1,6 +1,6 @@
 package colors;
 
-/** Заготовки для виведення кольорового тексту */
+/** Р—Р°РіРѕС‚РѕРІРєРё РґР»СЏ РІРёРІРµРґРµРЅРЅСЏ РєРѕР»СЊРѕСЂРѕРІРѕРіРѕ С‚РµРєСЃС‚Сѓ */
 public class TextColors {
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";

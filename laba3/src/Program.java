@@ -1,7 +1,7 @@
 import druids.*;
 import battles.*;
 
-/** Основний клас */
+/** РѕСЃРЅРѕРІРЅРёР№ РєР»Р°СЃ РїСЂРѕРіСЂР°РјРё */
 public class Program {
     public static void main(String[] args) {
         BasicDruid rob1 = new StrongDruid("vitalik");

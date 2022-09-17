@@ -2,7 +2,7 @@ package battles;
 
 import druids.BasicDruid;
 
-/** Дуель між двома друїдами */
+/** Р”СѓРµР»СЊ РјС–Р¶ РґРІРѕРјР° РґСЂСѓС—РґР°РјРё */
 public class OneVsOne {
 
     private BasicDruid robWhite, robBlack;
@@ -27,8 +27,8 @@ public class OneVsOne {
     private boolean anybodyWon(){
         if (robWhite.isDied() || robBlack.isDied()){
             boolean whiteWinner = robBlack.isDied();
-            System.out.println((whiteWinner ? (robWhite.toString()+ " (Біла ") : (robBlack.toString() + " (Чорна ")) +
-                    "команда) - перемога");
+            System.out.println((whiteWinner ? (robWhite.toString()+ " (Р‘С–Р»Р° ") : (robBlack.toString() + " (Р§РѕСЂРЅР° ")) +
+                    "РєРѕРјР°РЅРґР°) - РїРµСЂРµРјРѕРіР°");
             return true;
         }
         return false;
