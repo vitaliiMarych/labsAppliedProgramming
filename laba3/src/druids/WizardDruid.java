@@ -33,6 +33,10 @@ public class WizardDruid extends BasicDruid{
         System.out.println(TextColors.PURPLE + "Друід " + type + " " + name + " відновив 90 мани, тепер його мана = " + mana + TextColors.RESET);
     }
 
-
+    @Override
+    public void wasHilled(double koef) {
+        System.out.println(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
+        health += (int) (koef * 225);
+    }
 
 }

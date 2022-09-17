@@ -1,5 +1,7 @@
 package druids;
 
+import colors.TextColors;
+
 /** Сильний друїд, хоча моє досить малий запас здоров'я, зато махає мечем покраще Дартаньяна або Гатса
  * Вдобавок у сильного друїда є берсекрмод який збільшує урон
  * */
@@ -19,6 +21,12 @@ public class StrongDruid extends BasicDruid{
             enemy.gotDamage((this.Damage(bersercMode)));
         else
             enemy.gotDamage(this.Damage());
+    }
+
+    @Override
+    public void wasHilled(double koef) {
+        System.out.println(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
+        health += (int) (koef * 200);
     }
 
 }

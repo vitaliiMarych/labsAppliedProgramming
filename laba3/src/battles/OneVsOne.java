@@ -1,6 +1,7 @@
 package battles;
 
 import druids.BasicDruid;
+import druids.HillerDruid;
 import druids.WizardDruid;
 
 import java.util.stream.IntStream;
@@ -30,8 +31,12 @@ public class OneVsOne {
     private void move(BasicDruid rob, BasicDruid enemy){
         if (rob.getClass() == WizardDruid.class)
             IntStream.range(0,2).forEach(i -> rob.makeMove(enemy));
-        else
+
+        else {
+            if (rob.getClass() == HillerDruid.class)
+                rob.wasHilled(((HillerDruid) rob).getHillKoef());
             rob.makeMove(enemy);
+        }
     }
 
 

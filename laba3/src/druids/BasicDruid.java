@@ -42,6 +42,7 @@ public abstract class BasicDruid {
         return Damage(1);
     }
 
+    public abstract void wasHilled(double koef);
 
     //overload
     @Override
