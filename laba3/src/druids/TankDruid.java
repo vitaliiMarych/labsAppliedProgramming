@@ -6,7 +6,7 @@ package druids;
 public class TankDruid extends BasicDruid{
 
     public TankDruid(String name){
-        this.type = "танк";
+        this.type = "tank";
         this.health = 350;
         this.damage = 30;
         this.name = name;

@@ -8,7 +8,7 @@ public class StrongDruid extends BasicDruid{
     private double bersercMode = 1.3;
 
     public StrongDruid(String name) {
-        this.type = "берсерк";
+        this.type = "berserc";
         this.health = 200;
         this.damage = 65;
         this.name = name;

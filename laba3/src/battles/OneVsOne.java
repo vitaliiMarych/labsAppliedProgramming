@@ -1,6 +1,9 @@
 package battles;
 
 import druids.BasicDruid;
+import druids.WizardDruid;
+
+import java.util.stream.IntStream;
 
 /** Дуель між двома друїдами */
 public class OneVsOne {
@@ -13,16 +16,25 @@ public class OneVsOne {
     }
 
     public void battle(){
-        robWhite.makeMove(robBlack);
+        move(robWhite, robBlack);
         if (anybodyWon()) return;
         System.out.println();
 
-        robBlack.makeMove(robWhite);
+        move(robBlack, robWhite);
         if (anybodyWon()) return;
         System.out.println();
 
         battle();
     }
+
+    private void move(BasicDruid rob, BasicDruid enemy){
+        if (rob.getClass() == WizardDruid.class)
+            IntStream.range(0,2).forEach(i -> rob.makeMove(enemy));
+        else
+            rob.makeMove(enemy);
+    }
+
+
 
     private boolean anybodyWon(){
         if (robWhite.isDied() || robBlack.isDied()){
