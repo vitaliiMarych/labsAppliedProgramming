@@ -50,4 +50,9 @@ public abstract class BasicDruid {
         return "Друід " + type + " " + name + " має " + health + " hp ";
     }
 
+    //geters
+
+    public int getHealth() {
+        return health;
+    }
 }

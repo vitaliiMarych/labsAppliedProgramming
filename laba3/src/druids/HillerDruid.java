@@ -18,7 +18,7 @@ public class HillerDruid extends BasicDruid{
 
     @Override
     public void wasHilled(double koef) {
-        System.out.println(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
+        System.out.println(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp" + TextColors.RESET);
         health += (int) (koef * 200);
     }
 
