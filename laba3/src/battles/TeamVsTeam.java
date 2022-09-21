@@ -70,10 +70,11 @@ public class TeamVsTeam {
         boolean blackWin = Arrays.stream(blackTeam).anyMatch(x->!x.isDied());
 
         if (!whiteWin || !blackWin){
+            IntStream.range(0,3).forEach(x -> FilePrint.print("------------------------------------------------"));
             if (whiteWin)
-                FilePrint.print(TextColors.CYAN +"Біла команда перемогла");
+                FilePrint.print(TextColors.CYAN +"Біла команда перемогла" + TextColors.RESET);
             else
-                FilePrint.print(TextColors.CYAN + "Чорна команда перемогла");
+                FilePrint.print(TextColors.CYAN + "Чорна команда перемогла" + TextColors.RESET);
 
             printInfoTeams();
             FilePrint.close();

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class FilePrint {
-    static FileWriter fw;
+    private static FileWriter fw;
 
     public static void create(String path) {
         try {
@@ -25,8 +25,6 @@ public class FilePrint {
         }
 
     }
-
-
 
     public static void close() {
         try {

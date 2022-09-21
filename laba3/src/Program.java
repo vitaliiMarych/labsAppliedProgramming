@@ -1,9 +1,12 @@
 import druids.*;
 import battles.*;
+import fileWork.FileScan;
 
 /** основний клас програми */
 public class Program {
     public static void main(String[] args) {
+        String path = "file.txt";
+
         BasicDruid Wrob1 = new TankDruid("arsen1");
         BasicDruid Wrob2 = new TankDruid("arsen2");
         BasicDruid Wrob3 = new TankDruid("arsen3");
@@ -14,8 +17,6 @@ public class Program {
         BasicDruid Brob3 = new WizardDruid("sanya3");
         BasicDruid[] teamBlack = new BasicDruid[] {Brob1, Brob2, Brob3};
 
-        String path = "D:\\gitHub\\labsAppliedProgramming\\laba3\\src\\file.txt";
-
         TeamVsTeam batl1 = new TeamVsTeam(teamWhite, teamBlack, path);
 
 //        BasicDruid Wrob = new StrongDruid("fesf");
@@ -25,6 +26,8 @@ public class Program {
 
 
         batl1.battle();
-
+        FileScan.create(path);
+        FileScan.printAll();
+        FileScan.close();
     }
 }
