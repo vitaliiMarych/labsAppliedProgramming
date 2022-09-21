@@ -1,5 +1,6 @@
 package battles;
 
+import colors.TextColors;
 import druids.BasicDruid;
 import druids.HillerDruid;
 import druids.WizardDruid;
@@ -8,7 +9,6 @@ import java.util.stream.IntStream;
 
 /** Дуель між двома друїдами */
 public class OneVsOne {
-
     private BasicDruid drWhite, drBlack;
 
     public OneVsOne(BasicDruid r1, BasicDruid r2){
@@ -39,12 +39,11 @@ public class OneVsOne {
         }
     }
 
-
-
     private boolean anybodyWon(){
         if (drWhite.isDied() || drBlack.isDied()){
             boolean whiteWinner = drBlack.isDied();
-            System.out.println((whiteWinner ? (drWhite.toString()+ " (Біла ") : (drBlack.toString() + " (Чорна ")) +
+            System.out.println(TextColors.CYAN +
+                    (whiteWinner ? (drWhite.toString()+ " (Біла ") : (drBlack.toString() + " (Чорна ")) +
                     "команда) - перемога");
             return true;
         }

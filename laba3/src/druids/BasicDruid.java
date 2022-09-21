@@ -51,8 +51,15 @@ public abstract class BasicDruid {
     }
 
     //geters
-
     public int getHealth() {
         return health;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
     }
 }

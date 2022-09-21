@@ -7,11 +7,11 @@ import colors.TextColors;
  * */
 public class HillerDruid extends BasicDruid{
 
-    double hillKoef = 0.08;
+    double hillKoef = 0.04;
     public HillerDruid(String name){
         this.type = "hiller";
         this.health = 200;
-        this.damage = 35;
+        this.damage = 30;
         this.name = name;
         this.defense = 1.05;
     }
