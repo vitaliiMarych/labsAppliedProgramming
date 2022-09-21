@@ -4,6 +4,7 @@ import colors.TextColors;
 import druids.BasicDruid;
 import druids.HillerDruid;
 import druids.WizardDruid;
+import fileWork.FilePrint;
 
 import java.util.stream.IntStream;
 
@@ -11,19 +12,20 @@ import java.util.stream.IntStream;
 public class OneVsOne {
     private BasicDruid drWhite, drBlack;
 
-    public OneVsOne(BasicDruid r1, BasicDruid r2){
+    public OneVsOne(BasicDruid r1, BasicDruid r2, String path){
         drWhite = r1;
         drBlack = r2;
+        FilePrint.create(path);
     }
 
     public void battle(){
         move(drWhite, drBlack);
         if (anybodyWon()) return;
-        System.out.println();
+        FilePrint.print("");
 
         move(drBlack, drWhite);
         if (anybodyWon()) return;
-        System.out.println();
+        FilePrint.print("");
 
         battle();
     }
@@ -42,7 +44,7 @@ public class OneVsOne {
     private boolean anybodyWon(){
         if (drWhite.isDied() || drBlack.isDied()){
             boolean whiteWinner = drBlack.isDied();
-            System.out.println(TextColors.CYAN +
+            FilePrint.print(TextColors.CYAN +
                     (whiteWinner ? (drWhite.toString()+ " (Біла ") : (drBlack.toString() + " (Чорна ")) +
                     "команда) - перемога");
             return true;

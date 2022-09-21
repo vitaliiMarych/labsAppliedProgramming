@@ -1,6 +1,7 @@
 package druids;
 
 import colors.TextColors;
+import fileWork.FilePrint;
 
 /** Танк буде мати багато здоров'я і ще в добавок до цього щит який дасть йому захист, але урону мало завдавати
  * Якщо це командний бій, то танк агрить своїх противників
@@ -17,7 +18,7 @@ public class TankDruid extends BasicDruid{
 
     @Override
     public void wasHilled(double koef) {
-        System.out.println(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
+        FilePrint.print(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
         health += (int) (koef * 350);
     }
 

@@ -1,6 +1,7 @@
 package druids;
 
 import colors.TextColors;
+import fileWork.FilePrint;
 
 /** Чародій може кидати вогняні кулі у 2 суперників з найменшим здоров'ям
  * Це єдиний друід який може атакувати зразу дві цілі якщо у нього достатньо мани
@@ -20,7 +21,7 @@ public class WizardDruid extends BasicDruid{
     @Override
     public void makeMove(BasicDruid enemy) {
         if (mana > 35) {
-            System.out.println(TextColors.YELLOW + "Друід " + type + " " + name + " говорить заклинання вогняної кулі" + TextColors.RESET);
+            FilePrint.print(TextColors.YELLOW + "Друід " + type + " " + name + " говорить заклинання вогняної кулі" + TextColors.RESET);
             enemy.gotDamage(this.Damage());
             mana -= 35;
         }
@@ -30,12 +31,12 @@ public class WizardDruid extends BasicDruid{
 
     private void restoringMana(){
         mana += 90;
-        System.out.println(TextColors.PURPLE + "Друід " + type + " " + name + " відновив 90 мани, тепер його мана = " + mana + TextColors.RESET);
+        FilePrint.print(TextColors.PURPLE + "Друід " + type + " " + name + " відновив 90 мани, тепер його мана = " + mana + TextColors.RESET);
     }
 
     @Override
     public void wasHilled(double koef) {
-        System.out.println(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
+        FilePrint.print(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
         health += (int) (koef * 225);
     }
 

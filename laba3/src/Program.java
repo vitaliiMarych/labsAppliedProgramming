@@ -14,7 +14,9 @@ public class Program {
         BasicDruid Brob3 = new WizardDruid("sanya3");
         BasicDruid[] teamBlack = new BasicDruid[] {Brob1, Brob2, Brob3};
 
-        TeamVsTeam batl1 = new TeamVsTeam(teamWhite, teamBlack);
+        String path = "D:\\gitHub\\labsAppliedProgramming\\laba3\\src\\file.txt";
+
+        TeamVsTeam batl1 = new TeamVsTeam(teamWhite, teamBlack, path);
 
 //        BasicDruid Wrob = new StrongDruid("fesf");
 //        BasicDruid Brob = new WizardDruid("fgdfg");

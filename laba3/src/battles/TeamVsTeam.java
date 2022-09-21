@@ -1,6 +1,7 @@
 package battles;
 import colors.TextColors;
 import druids.*;
+import fileWork.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -14,23 +15,24 @@ public class TeamVsTeam {
     BasicDruid[] blackTeam;
     private int roundN = 1;
 
-    public TeamVsTeam(BasicDruid[] white, BasicDruid[] black) {
+
+    public TeamVsTeam(BasicDruid[] white, BasicDruid[] black, String path) {
         whiteTeam = white;
         blackTeam = black;
-
+        FilePrint.create(path);
     }
 
     public void battle(){
-        System.out.println("------------------------------------------------\nБіла команда атакує\n");
+        FilePrint.print("------------------------------------------------\nБіла команда атакує\n");
         if (move(whiteTeam, blackTeam)) return;
-        System.out.println("Інформація про чорну команду:");
-        Arrays.stream(blackTeam).forEach(x -> System.out.println(x.toString()));
+        FilePrint.print("Інформація про чорну команду:");
+        printInfoTeam(blackTeam);
 
-        System.out.println("------------------------------------------------\nЧорна команда атакує\n");
+        FilePrint.print("------------------------------------------------\nЧорна команда атакує\n");
         if (move(blackTeam, whiteTeam)) return;
-        System.out.println("Інформація про білу команду:");
-        Arrays.stream(whiteTeam).forEach(x -> System.out.println(x.toString()));
-        System.out.println("------------------------------------------------\n" + TextColors.BLUE +
+        FilePrint.print("Інформація про білу команду:");
+        printInfoTeam(whiteTeam);
+        FilePrint.print("------------------------------------------------\n" + TextColors.BLUE +
                 (roundN++) + " раунд закінчився. Інформація про команди:" + TextColors.RESET);
         printInfoTeams();
 
@@ -57,7 +59,7 @@ public class TeamVsTeam {
 
                 Arrays.stream(enemy).filter(x -> !x.isDied()).limit(1).forEach(x -> dr.makeMove(x));
             }
-            System.out.println();
+            FilePrint.print("");
             if (anybodyWon()) return true;
         }
         return false;
@@ -69,31 +71,31 @@ public class TeamVsTeam {
 
         if (!whiteWin || !blackWin){
             if (whiteWin)
-                System.out.println(TextColors.CYAN +"Біла команда перемогла");
+                FilePrint.print(TextColors.CYAN +"Біла команда перемогла");
             else
-                System.out.println(TextColors.CYAN + "Чорна команда перемогла");
+                FilePrint.print(TextColors.CYAN + "Чорна команда перемогла");
 
             printInfoTeams();
+            FilePrint.close();
             return true;
         }
         return false;
     }
 
     private void printInfoTeams(){
-        System.out.println("Біла команда:");
-        for (BasicDruid dr : whiteTeam){
-            if (dr.isDied())
-                System.out.println("Друід " + dr.getType() + " " + dr.getName() + " мертвий");
-            else
-                System.out.println(dr.toString());
-        }
+        FilePrint.print("Біла команда:");
+        printInfoTeam(whiteTeam);
 
-        System.out.println("\nЧорна команда:");
-        for (BasicDruid dr : blackTeam){
+        FilePrint.print("\nЧорна команда:");
+        printInfoTeam(blackTeam);
+    }
+
+    private void printInfoTeam(BasicDruid[] team){
+        for (BasicDruid dr : team){
             if (dr.isDied())
-                System.out.println("Друід " + dr.getType() + " " + dr.getName() + " мертвий");
+                FilePrint.print(TextColors.RED + "Друід " + dr.getType() + " " + dr.getName() + " мертвий" + TextColors.RESET);
             else
-                System.out.println(dr.toString());
+                FilePrint.print(dr.toString());
         }
     }
 
