@@ -42,7 +42,7 @@ public class menu {
                     break;
 
                 case 3:
-                    System.out.print("Скільки друідів буде в одній команді?");
+                    System.out.print("Скільки друідів буде в одній команді? ");
                     int count = safeScanInt();
                     BasicDruid[] lst = new BasicDruid[count];
                     IntStream.range(0, count).forEach(i -> lst[i] = scanDruid());
@@ -51,7 +51,7 @@ public class menu {
                     break;
 
                 case 4:
-                    System.out.println("Виберіть Друідів:");
+                    System.out.println("Виберіть Друідів: ");
                     IntStream.range(0,listD.size()).forEach(i -> System.out.println((i + 1) + ") " +
                             listD.get(i).getType() + " " + listD.get(i).getName()));
                     System.out.println((listD.size() + 1) + ") повернення у меню");
@@ -65,6 +65,10 @@ public class menu {
                     } while (second == first);
 
                     if (second == maxSize) break;
+
+                    listD.get(first - 1).reset();
+                    listD.get(second - 1).reset();
+
                     OneVsOne batl = new OneVsOne(listD.get(first - 1), listD.get(second - 1), path);
 
                     batl.battle();
@@ -77,7 +81,7 @@ public class menu {
                     System.out.println("Виберіть команду:");
                     int nt = 1;
                     for (BasicDruid[] lstT : listListD) {
-                        System.out.println(nt++ + "команда: ");
+                        System.out.println(nt++ + ") команда: ");
                         IntStream.range(0, lstT.length).forEach(i -> System.out.println("\t" + (i + 1) + ") " +
                                 lstT[i].getType() + " " + lstT[i].getName()));
                     }
@@ -91,6 +95,10 @@ public class menu {
                     } while (second == first);
 
                     if (second == maxSize) break;
+
+                    Arrays.stream(listListD.get(first - 1)).forEach(BasicDruid::reset);
+                    Arrays.stream(listListD.get(second - 1)).forEach(BasicDruid::reset);
+
                     TeamVsTeam batlt = new TeamVsTeam(listListD.get(first - 1), listListD.get(second - 1), path);
 
                     batlt.battle();
@@ -128,11 +136,11 @@ public class menu {
     }
 
     private int chooseDruid(){
-        System.out.println("Виберіть тип друіда:\n" +
+        System.out.print("Виберіть тип друіда:\n" +
                 "1 - берсерк\n" +
                 "2 - танк\n" +
                 "3 - хіллер\n" +
-                "4 - чародій\n\n");
+                "4 - чародій              ---------> ");
 
         return safeScanInt(4);
     }
@@ -160,8 +168,4 @@ public class menu {
         }
         return null;
     }
-
-
 }
-
-

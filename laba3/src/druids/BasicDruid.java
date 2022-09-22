@@ -2,6 +2,8 @@ package druids;
 import colors.TextColors;
 import fileWork.FilePrint;
 
+import java.io.File;
+
 /** Абстрактний клас друідів з якого всі походять */
 public abstract class BasicDruid {
     //vars
@@ -9,7 +11,7 @@ public abstract class BasicDruid {
     protected int health, damage;
     protected double defense = 1;
 
-
+    protected double accuracy;
 
     //functs
     public void makeMove(BasicDruid enemy){
@@ -33,6 +35,13 @@ public abstract class BasicDruid {
     }
 
     public int Damage(double baff) {
+        double random = Math.random();
+
+        if (random > accuracy){
+            FilePrint.print(TextColors.BLACK + "Друід " + type + " " + name + " промахнувся" + TextColors.RESET);
+            return 0;
+        }
+
         int damage = (int) (baff * this.damage);
         FilePrint.print(TextColors.GREEN + "Друід " + type + " " + name + " завдав " + damage + " шкоди" + TextColors.RESET);
 
@@ -44,6 +53,13 @@ public abstract class BasicDruid {
     }
 
     public abstract void wasHilled(double koef);
+
+    public void wasBaffed(double attackBaf, double healthBaf){
+        this.health *= healthBaf;
+        this.damage *= attackBaf;
+    }
+
+    public void reset() {};
 
     //overload
     @Override

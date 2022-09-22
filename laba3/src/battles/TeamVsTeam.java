@@ -16,8 +16,20 @@ public class TeamVsTeam {
 
 
     public TeamVsTeam(BasicDruid[] white, BasicDruid[] black, String path) {
-        whiteTeam = white;
-        blackTeam = black;
+        whiteTeam = white.clone();
+        blackTeam = black.clone();
+
+        int delta = Math.abs(whiteTeam.length - blackTeam.length);
+        double bufAttack = delta * 1.2;
+        double bufHealth = delta * 1.12;
+
+        if (whiteTeam.length > blackTeam.length){
+            Arrays.stream(blackTeam).forEach(x -> x.wasBaffed(bufAttack,bufHealth));
+        }
+        else if (whiteTeam.length < blackTeam.length) {
+            Arrays.stream(whiteTeam).forEach(x -> x.wasBaffed(bufAttack,bufHealth));
+        }
+
         FilePrint.create(path);
     }
 

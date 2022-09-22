@@ -14,6 +14,7 @@ public class TankDruid extends BasicDruid{
         this.damage = 30;
         this.name = name;
         this.defense = 1.25;
+        this.accuracy = 0.85;
     }
 
     @Override
@@ -22,5 +23,8 @@ public class TankDruid extends BasicDruid{
         health += (int) (koef * 350);
     }
 
+    public void reset(){
+        this.health = 350;
+    }
 
 }

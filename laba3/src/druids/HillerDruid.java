@@ -8,13 +8,14 @@ import fileWork.FilePrint;
  * */
 public class HillerDruid extends BasicDruid{
 
-    double hillKoef = 0.055;
+    double hillKoef = 0.05;
     public HillerDruid(String name){
         this.type = "hiller";
-        this.health = 200;
-        this.damage = 30;
         this.name = name;
         this.defense = 1.05;
+        this.accuracy = 0.9;
+        this.damage = 30;
+        reset();
     }
 
     @Override
@@ -26,4 +27,9 @@ public class HillerDruid extends BasicDruid{
     public double getHillKoef() {
         return hillKoef;
     }
+
+    public void reset(){
+        this.health = 200;
+    }
+
 }

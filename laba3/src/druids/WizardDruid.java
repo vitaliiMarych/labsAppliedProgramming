@@ -12,10 +12,11 @@ public class WizardDruid extends BasicDruid{
     int mana = 200;
     public WizardDruid(String name){
         this.type = "wizard";
-        this.health = 225;
         this.damage = 32;
         this.name = name;
         this.defense = 1.05;
+        this.accuracy = 0.7;
+        reset();
     }
 
     @Override
@@ -38,6 +39,10 @@ public class WizardDruid extends BasicDruid{
     public void wasHilled(double koef) {
         FilePrint.print(TextColors.BLUE + "Друід " + type + " " + name + " вилікувався на " + (int) (koef * 200) + " hp");
         health += (int) (koef * 225);
+    }
+
+    public void reset(){
+        this.health = 225;
     }
 
 }
