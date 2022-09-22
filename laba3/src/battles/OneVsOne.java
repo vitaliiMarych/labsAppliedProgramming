@@ -46,7 +46,8 @@ public class OneVsOne {
             boolean whiteWinner = drBlack.isDied();
             FilePrint.print(TextColors.CYAN +
                     (whiteWinner ? (drWhite.toString()+ " (Біла ") : (drBlack.toString() + " (Чорна ")) +
-                    "команда) - перемога");
+                    "команда) - перемога" + TextColors.RESET);
+            FilePrint.close();
             return true;
         }
         return false;
