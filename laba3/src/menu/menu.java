@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 public class menu {
 
     String path = "file.txt";
-    ArrayList<BasicDruid> listD = new ArrayList<BasicDruid>();
+    ArrayList<BasicDruid> listD = new ArrayList<>();
     ArrayList<BasicDruid[]> listListD = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
 
@@ -132,7 +132,7 @@ public class menu {
     }
 
     private void changeFile(String file){
-        this.path = path;
+        this.path = file;
     }
 
     private int chooseDruid(){

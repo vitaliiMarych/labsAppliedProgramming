@@ -20,8 +20,8 @@ public class TeamVsTeam {
         blackTeam = black.clone();
 
         int delta = Math.abs(whiteTeam.length - blackTeam.length);
-        double bufAttack = delta * 1.2;
-        double bufHealth = delta * 1.12;
+        double bufAttack = delta * 1.22;
+        double bufHealth = delta * 1.14;
 
         if (whiteTeam.length > blackTeam.length){
             Arrays.stream(blackTeam).forEach(x -> x.wasBaffed(bufAttack,bufHealth));
@@ -60,15 +60,15 @@ public class TeamVsTeam {
                     IntStream.range(0, 2).forEach(x -> dr.makeMove(e));
                 }
                 else {
-                    Comparator<BasicDruid> cp = Comparator.comparing(x -> x.getHealth());
-                    Arrays.stream(enemy).filter(x -> !x.isDied()).sorted(cp).limit(2).forEach(x -> dr.makeMove(x));
+                    Comparator<BasicDruid> cp = Comparator.comparing(BasicDruid::getHealth);
+                    Arrays.stream(enemy).filter(x -> !x.isDied()).sorted(cp).limit(2).forEach(dr::makeMove);
                 }
 
             } else {
                 if (dr.getClass() == HillerDruid.class)
                     Arrays.stream(druidsAlive).filter(x -> !x.isDied()).forEach(x -> x.wasHilled(((HillerDruid) dr).getHillKoef()));
 
-                Arrays.stream(enemy).filter(x -> !x.isDied()).limit(1).forEach(x -> dr.makeMove(x));
+                Arrays.stream(enemy).filter(x -> !x.isDied()).limit(1).forEach(dr::makeMove);
             }
             FilePrint.print("");
             if (anybodyWon()) return true;
