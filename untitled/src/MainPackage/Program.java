@@ -10,10 +10,11 @@ import java.sql.SQLException;
 
 public class Program {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        DataBase.connection();
-//        DataBase.createTable();
-//        DataBase.closeBD();
+        DataBase.connection();
+        DataBase.createTable();
 
+
+        //DataBase.insertCoffee("kryta3", "мелена", 12, 11.2,"молоко");
 
         Menu.createMenu();
         CoffeeVan.start("Vitalik coffee");

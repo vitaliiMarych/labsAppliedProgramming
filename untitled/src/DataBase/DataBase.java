@@ -1,15 +1,16 @@
 package DataBase;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import CoffeeVan.CoffeeCreators.CoffeeCreator;
+
+
+import java.sql.*;
 
 public class DataBase {
 
     private static Connection conn;
-    private static Statement statm;
+    private static Statement mainStatm, statmCoffee, statmCreator, statmTypCoffe, statmTypCreator;
 
+    //connecting
     public static void connection() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         conn = DriverManager.getConnection("jdbc:sqlite:CoffeeVan.db");
@@ -17,41 +18,57 @@ public class DataBase {
         System.out.println("basaDate connected");
     }
 
-//    public static void insertType(String type) throws SQLException {
-//        statm.execute("INSERT INTO 'types' ('type') values ('"+ type +"')");
-//
-//        System.out.println(type + " added");
-//    }
-
-
+    //create tables
     public static void createTable() throws SQLException {
-        statm = conn.createStatement();
+        mainStatm = conn.createStatement();
+        statmCoffee = conn.createStatement();
+        statmCreator = conn.createStatement();
+        statmTypCoffe = conn.createStatement();
+        statmTypCreator = conn.createStatement();
 
-        statm.execute("CREATE TABLE IF NOT EXISTS 'typesOfCoffee' (" +
+        mainStatm.execute("CREATE TABLE IF NOT EXISTS 'typesOfCreator' (" +
                 "'id'           INTEGER         PRIMARY KEY AUTOINCREMENT," +
                 "'type'         VARCHAR (20)" +
                 ")");
 
-        statm.execute("INSERT INTO 'typesOfCreators'('id', 'type') VALUES ('1','зернова')");
-        statm.execute("INSERT INTO 'typesOfCreators'('id', 'type') VALUES ('2','мелена')");
-        statm.execute("INSERT INTO 'typesOfCreators'('id', 'type') VALUES ('3','розчинна')");
+        ResultSet existTable = mainStatm.executeQuery("SELECT EXISTS(SELECT * FROM 'typesOfCreator' WHERE id BETWEEN 1 AND 3)");
 
-        statm.execute("CREATE TABLE IF NOT EXISTS 'Coffees' (" +
+        if (!existTable.getBoolean(1)) {
+            mainStatm.execute("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('1','чайник')");
+            mainStatm.execute("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('2','кавова машина')");
+            mainStatm.execute("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('3','турка')");
+        }
+
+        mainStatm.execute("CREATE TABLE IF NOT EXISTS 'typesOfCoffee' (" +
+                "'id'           INTEGER         PRIMARY KEY AUTOINCREMENT," +
+                "'type'         VARCHAR (20)," +
+                "'idCreator'    INTEGER         REFERENCES 'typesOfCreator' ('id')" +
+                ")");
+
+        existTable = mainStatm.executeQuery("SELECT EXISTS(SELECT * FROM 'typesOfCoffee' WHERE id BETWEEN 1 AND 3)");
+
+        if (!existTable.getBoolean(1)) {
+            mainStatm.execute("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('1','зернова','2')");
+            mainStatm.execute("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('2','мелена','3')");
+            mainStatm.execute("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('3','розчинна','1')");
+        }
+
+        mainStatm.execute("CREATE TABLE IF NOT EXISTS 'Coffees' (" +
                 "'id'           INTEGER         PRIMARY KEY AUTOINCREMENT," +
                 "'name'         VARCHAR (60)," +
-                "'canSell'      BOOLEAN         DEFAULT(0)," +
-                "'type'         VARCHAR (30)," +
+                "'canSell'      BOOLEAN," +
+                "'idType'       INTEGER         REFERENCES 'typesOfCoffee' ('id')," +
                 "'state'        VARCHAR (100)," +
                 "'countOfSell'  INTEGER         DEFAULT(0)," +
                 "'cost'         INTEGER         NOT NULL," +
                 "'volume'       DOUBLE          NOT NULL," +
-                "'idCreator'    INTEGER         REFERENCES 'typesOfCoffee' ('id')" +
+                "'recommendAdd'   VARCHAR (50)" +
                 ")");
 
-        statm.execute("CREATE TABLE IF NOT EXISTS 'Creators' (" +
+        mainStatm.execute("CREATE TABLE IF NOT EXISTS 'Creators' (" +
                 "'id'           INTEGER         PRIMARY KEY AUTOINCREMENT," +
-                "'type'         INTEGER         REFERENCES 'typesOfCoffee' ('id') ," +
-                "'isWorking'    BOOLEAN         DEFAULT(0)," +
+                "'idType'       INTEGER         REFERENCES 'typesOfCreator' ('id') ," +
+                "'isWorking'    BOOLEAN         DEFAULT(1)," +
                 "'state'        VARCHAR (100)   DEFAULT('Everything is good')" +
                 ")");
 
@@ -59,10 +76,52 @@ public class DataBase {
 
     }
 
+    //inserts
+    public static void insertCoffee(String NAME, String TYPE,
+                                    int COST, double VOLUME, String RECOMMEND) throws SQLException {
 
+        boolean canSell = false;
+        String state = "Нема на складі";
+
+        if (VOLUME > 0) {
+            canSell = true;
+            state = "Можна продавати";
+        }
+
+        ResultSet idType = mainStatm.executeQuery(String.format("SELECT id FROM 'typesOfCoffee' WHERE type = '%s'", TYPE));
+
+        mainStatm.execute("INSERT INTO 'Coffees'(name, canSell, idType, state, cost, volume, recommendAdd) VALUES" +
+                String.format("('%s','%b','%d','%s','%d','%f','%s')",
+                        NAME, canSell, idType.getInt(1), state, COST, VOLUME, RECOMMEND));
+
+    }
+
+    //geters
+    public static ResultSet getCoffeeData() throws SQLException {
+        return statmCoffee.executeQuery("SELECT * FROM 'Coffees'");
+    }
+
+    public static ResultSet getTypeOfCoffee(int id) throws SQLException {
+        return statmTypCoffe.executeQuery("SELECT * FROM 'typesOfCoffee' WHERE id = " + id + "");
+    }
+
+    public static ResultSet getTypeOfCreator(int id) throws SQLException {
+        return statmTypCreator.executeQuery("SELECT * FROM 'typesOfCreator'WHERE id = " + id + "");
+    }
+
+    public static ResultSet getCreators() throws SQLException {
+        return statmCreator.executeQuery("SELECT * FROM 'Creators'");
+    }
+
+
+    //close
     public static void closeBD() throws SQLException {
         conn.close();
-        statm.close();
+        mainStatm.close();
+        statmTypCreator.close();
+        statmCoffee.close();
+        statmCreator.close();
+        statmTypCoffe.close();
         System.out.println("basaDate closed");
     }
 

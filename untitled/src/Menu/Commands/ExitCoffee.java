@@ -1,5 +1,9 @@
 package Menu.Commands;
 
+import DataBase.DataBase;
+
+import java.sql.SQLException;
+
 public class ExitCoffee implements ICommand{
     @Override
     public String getInfoAboutCommand() {
@@ -7,7 +11,8 @@ public class ExitCoffee implements ICommand{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws SQLException {
+        DataBase.closeBD();
         System.exit(0);
     }
 }

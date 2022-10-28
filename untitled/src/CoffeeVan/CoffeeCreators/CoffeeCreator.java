@@ -9,9 +9,15 @@ public class CoffeeCreator {
         return isWorking;
     }
 
+    public CoffeeCreator(boolean isWorking, String state, String type) {
+        this.isWorking = isWorking;
+        this.state = state;
+        this.type = type;
+    }
+
     public void setWorking(boolean working) {
         if (working)
-            setWorking(working, "Everything is good");
+            setWorking(working, "Все добре");
         else
             setWorking(working, "Причину не відомо");
     }

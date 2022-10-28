@@ -4,8 +4,7 @@ import CoffeeVan.CoffeeCreators.CoffeeCreator;
 
 import java.util.ArrayList;
 
-abstract public class Coffee implements Comparable<Coffee>{
-    private static  int autoId = 1;
+public class Coffee implements Comparable<Coffee>{
     protected int id;
     protected String name = "назву не придумали, можливо каву назвуть у вашу честь";
     protected boolean canSell;
@@ -15,7 +14,20 @@ abstract public class Coffee implements Comparable<Coffee>{
     protected int cost;
     protected double volume;
     protected String recomendAdditive;
-    protected CoffeeCreator creator;
+    protected String creatortype;
+
+    public Coffee(int id, String name, boolean canSell, String type, String state, int countOfSell, int cost, double volume, String recomendAdditive, String creatortype) {
+        this.id = id;
+        this.name = name;
+        this.canSell = canSell;
+        this.type = type;
+        this.state = state;
+        this.countOfSell = countOfSell;
+        this.cost = cost;
+        this.volume = volume;
+        this.recomendAdditive = recomendAdditive;
+        this.creatortype = creatortype;
+    }
 
     @Override
     public String toString() {
@@ -35,6 +47,7 @@ abstract public class Coffee implements Comparable<Coffee>{
         return this.getCost() - o.getCost();
     }
 
+    //other funct
     public String toStringAllInfo() {
         return  "Кава " + type + " - " + name + "\n" +
                 "Стан кави - " + state + "\n" +
@@ -42,12 +55,10 @@ abstract public class Coffee implements Comparable<Coffee>{
                 "Кількість продаж - " + countOfSell + "\n" +
                 "Об'єм - " + volume + "\n" +
                 "Рекомендована добавка - " + recomendAdditive + "\n" +
-                "Засіб для приготування - " + creator.getType() + "\n";
+                "Засіб для приготування - " + creatortype + "\n";
     }
 
-    public static int getNextId(){
-        return autoId++;
-    }
+    //geters and seters
 
     public int getId() {
         return id;
