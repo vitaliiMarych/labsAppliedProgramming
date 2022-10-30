@@ -19,9 +19,20 @@ public class SafeScans {
                     return n;
             }
             catch (Exception e) { }
-            System.out.print("Некоректно введено! Попробуйте ще раз: ");
+            System.out.println("Некоректно введено! Попробуйте ще раз: ");
         }
     }
 
+    public static double scanDouble(double max){
+        while (true) {
+            try {
+                double n = Double.parseDouble(sc.nextLine());
+                if (n > 0 && n <= max)
+                    return n;
+            }
+            catch (Exception e) { }
+            System.out.println("Некоректно введено! Попробуйте ще раз: ");
+        }
+    }
 
 }

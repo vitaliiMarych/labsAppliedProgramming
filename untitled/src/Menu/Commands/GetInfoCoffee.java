@@ -12,7 +12,8 @@ public class GetInfoCoffee implements ICommand{
 
     @Override
     public void execute() {
-        int id = SafeScans.scanInt(CoffeeVan.getCoffees().size());
-        CoffeeVan.getCoffees().stream().filter(x -> x.getId() == id).forEach(Coffee::toStringAllInfo);
+        System.out.println("Введіть id кави про яку вам треба дізнатися більше");
+        int id = SafeScans.scanInt();
+        CoffeeVan.getCoffees().stream().filter(x -> x.getId() == id).forEach(x -> System.out.println(x.toStringAllInfo()));
     }
 }

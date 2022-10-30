@@ -8,7 +8,7 @@ import java.sql.*;
 public class DataBase {
 
     private static Connection conn;
-    private static Statement mainStatm, statmCoffee, statmCreator, statmTypCoffe, statmTypCreator;
+    private static Statement mainStatm, secondStatm, statmCoffee, statmCreator, statmTypCoffe, statmTypCreator;
 
     //connecting
     public static void connection() throws ClassNotFoundException, SQLException {
@@ -21,6 +21,7 @@ public class DataBase {
     //create tables
     public static void createTable() throws SQLException {
         mainStatm = conn.createStatement();
+        secondStatm = conn.createStatement();
         statmCoffee = conn.createStatement();
         statmCreator = conn.createStatement();
         statmTypCoffe = conn.createStatement();
@@ -76,27 +77,15 @@ public class DataBase {
 
     }
 
-    //inserts
-    public static void insertCoffee(String NAME, String TYPE,
-                                    int COST, double VOLUME, String RECOMMEND) throws SQLException {
-
-        boolean canSell = false;
-        String state = "Нема на складі";
-
-        if (VOLUME > 0) {
-            canSell = true;
-            state = "Можна продавати";
-        }
-
-        ResultSet idType = mainStatm.executeQuery(String.format("SELECT id FROM 'typesOfCoffee' WHERE type = '%s'", TYPE));
-
-        mainStatm.execute("INSERT INTO 'Coffees'(name, canSell, idType, state, cost, volume, recommendAdd) VALUES" +
-                String.format("('%s','%b','%d','%s','%d','%f','%s')",
-                        NAME, canSell, idType.getInt(1), state, COST, VOLUME, RECOMMEND));
-
+    //geters
+    public static Statement getMainStatm(){
+        return mainStatm;
     }
 
-    //geters
+    public static Statement getSecondStatm() {
+        return secondStatm;
+    }
+
     public static ResultSet getCoffeeData() throws SQLException {
         return statmCoffee.executeQuery("SELECT * FROM 'Coffees'");
     }
@@ -118,6 +107,7 @@ public class DataBase {
     public static void closeBD() throws SQLException {
         conn.close();
         mainStatm.close();
+        secondStatm.close();
         statmTypCreator.close();
         statmCoffee.close();
         statmCreator.close();

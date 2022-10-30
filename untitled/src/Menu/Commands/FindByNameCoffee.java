@@ -11,7 +11,7 @@ public class FindByNameCoffee implements ICommand{
 
     @Override
     public void execute() {
-
+        System.out.println("Введіть назву або її частину: ");
         String partOfName = SafeScans.scanLine();
 
 

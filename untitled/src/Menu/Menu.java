@@ -23,6 +23,7 @@ public class Menu {
         mn.put("Show all creators", new ShowAllCoffeeCreators());
         mn.put("Sort Coffee", new SortCoffee());
         mn.put("Exit", new ExitCoffee());
+        mn.put("Info about van", new GetInfoCoffeeVan());
 
     }
 
@@ -31,6 +32,7 @@ public class Menu {
             mn.get(command).execute();
         }
         catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Неправильно введена команда... попробуйте ще раз!");
         }
     }

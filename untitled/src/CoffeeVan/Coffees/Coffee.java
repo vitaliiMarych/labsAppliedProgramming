@@ -31,7 +31,7 @@ public class Coffee implements Comparable<Coffee>{
 
     @Override
     public String toString() {
-        return "Кава " + type + " - " + name;
+        return id + ") " + "Кава " + type + " - " + name;
     }
 
     @Override
@@ -85,13 +85,3 @@ public class Coffee implements Comparable<Coffee>{
     }
 }
 
-
-// кава буде відрізнятися за розрахунком ваги, хтось з банкою, хтось нє
-//•	Назва
-//        •	Фізичний стан
-//        •	Кількість покупок
-//        •	Ціна
-//        •	Назва
-//        •	Об’єм кави з упаковкою
-//        •	Добавки у каву
-//        •	Чи потрібний кавовий апарат
