@@ -15,5 +15,6 @@ public class SortCoffee implements ICommand{
     @Override
     public void execute() {
         Collections.sort(CoffeeVan.getCoffees());
+        (new ShowAllCoffee()).execute();
     }
 }

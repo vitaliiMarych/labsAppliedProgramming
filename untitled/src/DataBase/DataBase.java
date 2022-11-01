@@ -8,7 +8,7 @@ import java.sql.*;
 public class DataBase {
 
     private static Connection conn;
-    private static Statement mainStatm, secondStatm, statmCoffee, statmCreator, statmTypCoffe, statmTypCreator;
+    private static Statement mainStatm, secondStatm;
 
     //connecting
     public static void connection() throws ClassNotFoundException, SQLException {
@@ -22,22 +22,20 @@ public class DataBase {
     public static void createTable() throws SQLException {
         mainStatm = conn.createStatement();
         secondStatm = conn.createStatement();
-        statmCoffee = conn.createStatement();
-        statmCreator = conn.createStatement();
-        statmTypCoffe = conn.createStatement();
-        statmTypCreator = conn.createStatement();
+
 
         mainStatm.execute("CREATE TABLE IF NOT EXISTS 'typesOfCreator' (" +
                 "'id'           INTEGER         PRIMARY KEY AUTOINCREMENT," +
                 "'type'         VARCHAR (20)" +
                 ")");
 
+
         ResultSet existTable = mainStatm.executeQuery("SELECT EXISTS(SELECT * FROM 'typesOfCreator' WHERE id BETWEEN 1 AND 3)");
 
         if (!existTable.getBoolean(1)) {
-            mainStatm.execute("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('1','чайник')");
-            mainStatm.execute("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('2','кавова машина')");
-            mainStatm.execute("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('3','турка')");
+            mainStatm.executeUpdate("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('1','чайник')");
+            mainStatm.executeUpdate("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('2','кавова машина')");
+            mainStatm.executeUpdate("INSERT INTO 'typesOfCreator'('id', 'type') VALUES ('3','турка')");
         }
 
         mainStatm.execute("CREATE TABLE IF NOT EXISTS 'typesOfCoffee' (" +
@@ -49,9 +47,9 @@ public class DataBase {
         existTable = mainStatm.executeQuery("SELECT EXISTS(SELECT * FROM 'typesOfCoffee' WHERE id BETWEEN 1 AND 3)");
 
         if (!existTable.getBoolean(1)) {
-            mainStatm.execute("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('1','зернова','2')");
-            mainStatm.execute("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('2','мелена','3')");
-            mainStatm.execute("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('3','розчинна','1')");
+            mainStatm.executeUpdate("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('1','зернова','2')");
+            mainStatm.executeUpdate("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('2','мелена','3')");
+            mainStatm.executeUpdate("INSERT INTO 'typesOfCoffee'('id', 'type','idCreator') VALUES ('3','розчинна','1')");
         }
 
         mainStatm.execute("CREATE TABLE IF NOT EXISTS 'Coffees' (" +
@@ -70,11 +68,12 @@ public class DataBase {
                 "'id'           INTEGER         PRIMARY KEY AUTOINCREMENT," +
                 "'idType'       INTEGER         REFERENCES 'typesOfCreator' ('id') ," +
                 "'isWorking'    BOOLEAN         DEFAULT(1)," +
-                "'state'        VARCHAR (100)   DEFAULT('Everything is good')" +
+                "'state'        VARCHAR (100)   DEFAULT('Все добре')" +
                 ")");
 
         System.out.println("tables created");
 
+        existTable.close();
     }
 
     //geters
@@ -86,20 +85,14 @@ public class DataBase {
         return secondStatm;
     }
 
-    public static ResultSet getCoffeeData() throws SQLException {
-        return statmCoffee.executeQuery("SELECT * FROM 'Coffees'");
+//    public static execute
+
+    public static ResultSet getTypeOfCoffee(Statement st, int id) throws SQLException {
+        return st.executeQuery("SELECT * FROM 'typesOfCoffee' WHERE id = " + id + "");
     }
 
-    public static ResultSet getTypeOfCoffee(int id) throws SQLException {
-        return statmTypCoffe.executeQuery("SELECT * FROM 'typesOfCoffee' WHERE id = " + id + "");
-    }
-
-    public static ResultSet getTypeOfCreator(int id) throws SQLException {
-        return statmTypCreator.executeQuery("SELECT * FROM 'typesOfCreator'WHERE id = " + id + "");
-    }
-
-    public static ResultSet getCreators() throws SQLException {
-        return statmCreator.executeQuery("SELECT * FROM 'Creators'");
+    public static ResultSet getTypeOfCreator(Statement st, int id) throws SQLException {
+        return st.executeQuery("SELECT * FROM 'typesOfCreator'WHERE id = " + id + "");
     }
 
 
@@ -108,12 +101,9 @@ public class DataBase {
         conn.close();
         mainStatm.close();
         secondStatm.close();
-        statmTypCreator.close();
-        statmCoffee.close();
-        statmCreator.close();
-        statmTypCoffe.close();
         System.out.println("basaDate closed");
     }
+
 
 
 }

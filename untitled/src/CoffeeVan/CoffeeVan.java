@@ -37,10 +37,35 @@ public class CoffeeVan {
         return creators;
     }
 
-    public static void readCoffeeListFromDB() throws SQLException {
+    public static void readLists() throws SQLException {
+        readCoffeeListFromDB();
+        readCreatorListFromBD();
+    }
+
+    private static void readCreatorListFromBD() throws SQLException {
+        creators = new ArrayList<>();
+        ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Creators'");
+
+        while (rslt.next()){
+            int id = rslt.getInt(1);
+            boolean isWorking = rslt.getBoolean(3);
+            String state = rslt.getString(4);
+
+            int idType = rslt.getInt(2);
+            ResultSet typeColumh = DataBase.getTypeOfCreator(DataBase.getSecondStatm(), idType);
+            String type = typeColumh.getString(2);
+
+            CoffeeCreator cc = new CoffeeCreator(id, isWorking, state, type);
+            creators.add(cc);
+        }
+        DataBase.getSecondStatm().close();
+        DataBase.getMainStatm().close();
+    }
+
+    private static void readCoffeeListFromDB() throws SQLException {
 
         coffees = new ArrayList<>();
-        ResultSet rslt = DataBase.getCoffeeData();
+        ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Coffees'");
 
         while (rslt.next()){
 
@@ -60,11 +85,12 @@ public class CoffeeVan {
             String recomendAdditive = rslt.getString(9);
 
             int indexTypeCoffee = rslt.getInt(4);
-            ResultSet typecolumh = DataBase.getTypeOfCoffee(indexTypeCoffee);
+
+            ResultSet typecolumh = DataBase.getTypeOfCoffee(DataBase.getSecondStatm(), indexTypeCoffee);
             String type = typecolumh.getString(2);
             int indexTypeCreator = typecolumh.getInt(3);
 
-            String creatorType = DataBase.getTypeOfCreator(indexTypeCreator).getString(2);
+            String creatorType = DataBase.getTypeOfCreator(DataBase.getSecondStatm(), indexTypeCreator).getString(2);
 
             if (currentVolume + volume < maxVolume) {
                 Coffee coffee = new Coffee(id, name, canSell, type, state, countOfSell, cost, volume, recomendAdditive, creatorType);
@@ -75,10 +101,13 @@ public class CoffeeVan {
                 System.out.println("У фургоні недостатньо місця");
             }
         }
+        DataBase.getSecondStatm().close();
     }
 
     public static String toStringe() {
         return String.format("Кавовий фургон '%s', максимальний об'єм кави на складі - %f, поточний зайнятий об'єм - %f",
                 name, maxVolume, currentVolume);
     }
+
+
 }

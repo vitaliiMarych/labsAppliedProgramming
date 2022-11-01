@@ -38,14 +38,20 @@ public class ChangeInfoCoffee implements ICommand{
         } while (!type.equals("мелена") && !type.equals("розчинна") && !type.equals("зернова") && !type.equals("next"));
 
         int typeId;
-        if (type.equals("зернова"))
-            typeId = 1;
-        else if (type.equals("мелена"))
-            typeId = 2;
-        else if (type.equals("розчинна"))
-            typeId = 3;
-        else
-            typeId = rslt.getInt(4);
+        switch (type) {
+            case "зернова":
+                typeId = 1;
+                break;
+            case "мелена":
+                typeId = 2;
+                break;
+            case "розчинна":
+                typeId = 3;
+                break;
+            default:
+                typeId = rslt.getInt(4);
+                break;
+        }
 
 
         String buffer;
@@ -92,7 +98,7 @@ public class ChangeInfoCoffee implements ICommand{
                 if (buffer.equals("next"))
                     volume = (Double) rslt.getDouble(8);
                 else {
-                    volume = (Double) Program.df.parse(buffer);
+                    volume = (Double) Program.getDf().parse(buffer);
                 }
                 break;
             }
@@ -103,7 +109,6 @@ public class ChangeInfoCoffee implements ICommand{
 
         System.out.println("Введіть нову смачну добавку у цю каву");
         String recommned = SafeScans.scanLine();
-        //rslt.close();
 
         String query = String.format("UPDATE 'Coffees' " +
                 "SET 'name' = '%s', " +
@@ -114,7 +119,10 @@ public class ChangeInfoCoffee implements ICommand{
                 ", 'recommendAdd' = '%s'" +
                 " WHERE id = %d", name, typeId, count, cost, recommned, id);
 
-        DataBase.getSecondStatm().executeQuery(query);
+        int rowaffected = DataBase.getMainStatm().executeUpdate(query);
+
+        System.out.println(rowaffected);
+
     }
 
 

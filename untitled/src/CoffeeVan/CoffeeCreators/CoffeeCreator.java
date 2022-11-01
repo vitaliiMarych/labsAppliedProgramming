@@ -1,37 +1,33 @@
 package CoffeeVan.CoffeeCreators;
 
 public class CoffeeCreator {
-    private boolean isWorking;  //чи працює
+    private int id;
+    private boolean Working;  //чи працює
     private String state; //стан роботи
     private String type;
 
     public boolean isWorking() {
-        return isWorking;
+        return Working;
     }
 
-    public CoffeeCreator(boolean isWorking, String state, String type) {
-        this.isWorking = isWorking;
+    public CoffeeCreator(int id, boolean isWorking, String state, String type) {
+        this.id = id;
+        this.Working = isWorking;
         this.state = state;
         this.type = type;
-    }
-
-    public void setWorking(boolean working) {
-        if (working)
-            setWorking(working, "Все добре");
-        else
-            setWorking(working, "Причину не відомо");
-    }
-
-
-    public void setWorking(boolean working, String state) {
-        isWorking = working;
-        this.state = state;
     }
 
     public String getType() {
         return type;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%d) %s, працює - %b, стан - %s", id, type, Working, state);
+    }
+
+    //add
+    //delete
 
     //coffeeMug, coffeeMachine, Kettle
 }

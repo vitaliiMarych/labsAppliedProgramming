@@ -31,7 +31,7 @@ public class Coffee implements Comparable<Coffee>{
 
     @Override
     public String toString() {
-        return id + ") " + "Кава " + type + " - " + name;
+        return id + ") " + "Кава " + type + " - " + name + ", ціна - " + cost;
     }
 
     @Override

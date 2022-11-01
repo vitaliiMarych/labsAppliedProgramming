@@ -53,9 +53,9 @@ public class AddNewCoffee implements ICommand{
 
         ResultSet idType = statm.executeQuery(String.format("SELECT id FROM 'typesOfCoffee' WHERE type = '%s'", TYPE));
 
-        statm.execute("INSERT INTO 'Coffees'(name, canSell, idType, state, cost, volume, recommendAdd) VALUES" +
-                String.format("('%s','%b','%d','%s','%d','%f','%s')",
-                        NAME, canSell, idType.getInt(1), state, COST, VOLUME, RECOMMEND));
+        statm.executeUpdate("INSERT INTO 'Coffees'(name, canSell, idType, state, cost, volume, recommendAdd) VALUES" +
+                String.format("('%s','%d','%d','%s','%d','%f','%s')",
+                        NAME, canSell ? 1 : 0, idType.getInt(1), state, COST, VOLUME, RECOMMEND));
 
     }
 }
