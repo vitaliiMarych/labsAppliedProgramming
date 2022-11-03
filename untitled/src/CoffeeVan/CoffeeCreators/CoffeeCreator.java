@@ -21,6 +21,10 @@ public class CoffeeCreator {
         return type;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return String.format("%d) %s, працює - %b, стан - %s", id, type, Working, state);

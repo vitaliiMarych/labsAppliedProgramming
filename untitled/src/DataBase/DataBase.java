@@ -71,8 +71,6 @@ public class DataBase {
                 "'state'        VARCHAR (100)   DEFAULT('Все добре')" +
                 ")");
 
-        System.out.println("tables created");
-
         existTable.close();
     }
 
@@ -85,8 +83,6 @@ public class DataBase {
         return secondStatm;
     }
 
-//    public static execute
-
     public static ResultSet getTypeOfCoffee(Statement st, int id) throws SQLException {
         return st.executeQuery("SELECT * FROM 'typesOfCoffee' WHERE id = " + id + "");
     }
@@ -95,6 +91,9 @@ public class DataBase {
         return st.executeQuery("SELECT * FROM 'typesOfCreator'WHERE id = " + id + "");
     }
 
+    public static Connection getConn() {
+        return conn;
+    }
 
     //close
     public static void closeBD() throws SQLException {

@@ -17,14 +17,14 @@ public class ChangeStatusCoffee implements ICommand{
     public void execute() throws SQLException {
         System.out.println("Введіть id, яке потрібно змінити");
         int id = SafeScans.scanInt();
-        if (CoffeeVan.getCoffees().stream().noneMatch(x -> x.getId() == id)) {
+        if (CoffeeVan.getCreators().stream().noneMatch(x -> x.getId() == id)) {
             System.out.println("Такого id не знайдено");
             return;
         }
 
         ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Coffees' WHERE id = " + id + "");
 
-        System.out.println("Введіть чи можна продавати цю каву(next - залишити все як є): ");
+        System.out.println("Введіть чи можна продавати цю каву(y or n)(next - залишити все як є): ");
         String buffer;
         do {
             buffer = SafeScans.scanLine().toLowerCase();

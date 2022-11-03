@@ -24,7 +24,7 @@ public class ChangeStatusCoffeeCreator implements ICommand{
 
         ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Creators' WHERE id = " + id + "");
 
-        System.out.println("Введіть чи працює цей пристрій(next - залишити все як є): ");
+        System.out.println("Введіть чи працює цей пристрій(y or n)(next - залишити все як є): ");
         String buffer;
         do {
             buffer = SafeScans.scanLine().toLowerCase();

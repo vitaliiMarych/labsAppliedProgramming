@@ -18,12 +18,14 @@ public class Menu {
         mn.put("Find by name", new FindByNameCoffee());
         mn.put("Find by type", new FindByTypeCoffee());
         mn.put("Get info", new GetInfoCoffee());
-        mn.put("Show all coffee", new ShowAllCoffee());
-        mn.put("Show all avaible coffee", new ShowCoffeeAvaible());
-        mn.put("Show all creators", new ShowAllCoffeeCreators());
-        mn.put("Sort Coffee", new SortCoffee());
+        mn.put("Show coffee", new ShowAllCoffee());
+        mn.put("Show avaible coffee", new ShowCoffeeAvaible());
+        mn.put("Show creators", new ShowAllCoffeeCreators());
+        mn.put("Sort coffee", new SortCoffee());
         mn.put("Exit", new ExitCoffee());
-        mn.put("Info about van", new GetInfoCoffeeVan());
+        mn.put("Info van", new GetInfoCoffeeVan());
+        mn.put("Delete creator", new DeleteCreator());
+        mn.put("Add creator", new AddNewCreator());
 
     }
 

@@ -38,8 +38,8 @@ public class CoffeeVan {
     }
 
     public static void readLists() throws SQLException {
-        readCoffeeListFromDB();
         readCreatorListFromBD();
+        readCoffeeListFromDB();
     }
 
     private static void readCreatorListFromBD() throws SQLException {
@@ -67,6 +67,8 @@ public class CoffeeVan {
         coffees = new ArrayList<>();
         ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Coffees'");
 
+        DataBase.getConn().setAutoCommit(false);
+
         while (rslt.next()){
 
             int id = rslt.getInt(1);
@@ -75,9 +77,6 @@ public class CoffeeVan {
             String state = rslt.getString(5);
             int countOfSell = rslt.getInt(6);
             int cost = rslt.getInt(7);
-
-
-            //dabl ne tak raxye
 
             double f = rslt.getDouble(8);
 
@@ -92,6 +91,37 @@ public class CoffeeVan {
 
             String creatorType = DataBase.getTypeOfCreator(DataBase.getSecondStatm(), indexTypeCreator).getString(2);
 
+            DataBase.getSecondStatm().close();
+
+            if (canSell){
+                if (!findCreator(creatorType)){
+                    String query = String.format("UPDATE 'Coffees' " +
+                            "SET 'canSell' = '%d', " +
+                            "'state' = '%s' " +
+                            " WHERE id = %d", 0, "Проблема з пристоєм", id);
+
+                    DataBase.getSecondStatm().executeUpdate(query);
+
+                    canSell = false;
+                    state = "Проблема з пристоєм";
+
+                }
+            }
+
+            if (state.equals("Проблема з пристоєм")){
+                if (findCreator(creatorType)){
+                    String query = String.format("UPDATE 'Coffees' " +
+                            "SET 'canSell' = '%d', " +
+                            "'state' = '%s' " +
+                            " WHERE id = %d", 1, "Можна продавати", id);
+                    DataBase.getSecondStatm().executeUpdate(query);
+                    canSell = true;
+                    state = "Можна продавати";
+
+                }
+            }
+
+
             if (currentVolume + volume < maxVolume) {
                 Coffee coffee = new Coffee(id, name, canSell, type, state, countOfSell, cost, volume, recomendAdditive, creatorType);
                 coffees.add(coffee);
@@ -101,12 +131,20 @@ public class CoffeeVan {
                 System.out.println("У фургоні недостатньо місця");
             }
         }
+
+        DataBase.getConn().commit();
+        DataBase.getConn().setAutoCommit(true);
+
         DataBase.getSecondStatm().close();
     }
 
     public static String toStringe() {
         return String.format("Кавовий фургон '%s', максимальний об'єм кави на складі - %f, поточний зайнятий об'єм - %f",
                 name, maxVolume, currentVolume);
+    }
+
+    private static boolean findCreator(String type){
+        return CoffeeVan.getCreators().stream().anyMatch(x -> x.getType().equals(type) && x.isWorking());
     }
 
 
