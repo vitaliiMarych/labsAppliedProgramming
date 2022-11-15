@@ -30,8 +30,6 @@ public class CoffeeCreator {
         return String.format("%d) %s, працює - %b, стан - %s", id, type, Working, state);
     }
 
-    //add
-    //delete
 
     //coffeeMug, coffeeMachine, Kettle
 }

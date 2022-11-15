@@ -18,6 +18,7 @@ public class AddNewCoffee implements ICommand{
     @Override
     public void execute() throws SQLException {
 
+
         System.out.println("Введіть назву кави: ");
         String name = SafeScans.scanLine();
 

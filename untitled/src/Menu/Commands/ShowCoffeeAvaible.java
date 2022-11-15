@@ -2,6 +2,9 @@ package Menu.Commands;
 
 import CoffeeVan.CoffeeVan;
 import CoffeeVan.Coffees.Coffee;
+import GUI.PrintWindow;
+
+import java.util.ArrayList;
 
 public class ShowCoffeeAvaible implements ICommand{
     @Override
@@ -11,10 +14,11 @@ public class ShowCoffeeAvaible implements ICommand{
 
     @Override
     public void execute() {
-        if (CoffeeVan.getCoffees().stream().noneMatch(Coffee::isCanSell))
-            System.out.println("Доступної кави нема...");
+        ArrayList<String> arrList = new ArrayList<>();
+        CoffeeVan.getCoffees().stream().filter(Coffee::isCanSell).forEach(x -> arrList.add(x.toString()));
 
-        else
-            CoffeeVan.getCoffees().stream().filter(Coffee::isCanSell).forEach(x -> System.out.println(x.toString()));
+        PrintWindow.newWindow(arrList, "Show avaible coffee");
+
+
     }
 }

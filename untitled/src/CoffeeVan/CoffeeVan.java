@@ -139,7 +139,7 @@ public class CoffeeVan {
     }
 
     public static String toStringe() {
-        return String.format("Кавовий фургон '%s', максимальний об'єм кави на складі - %f, поточний зайнятий об'єм - %f",
+        return String.format("Кавовий фургон '%s' \nМаксимальний об'єм кави на складі - %f \nПоточний зайнятий об'єм - %f",
                 name, maxVolume, currentVolume);
     }
 

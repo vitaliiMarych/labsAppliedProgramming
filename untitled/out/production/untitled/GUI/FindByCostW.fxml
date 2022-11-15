@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="246.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControllerFindByCost">
+   <children>
+      <Label layoutX="24.0" layoutY="27.0" prefHeight="18.0" prefWidth="322.0" text="Введіть мінімальну ціну" />
+      <Label layoutX="24.0" layoutY="110.0" prefHeight="18.0" prefWidth="322.0" text="Введіть максимальну ціну" />
+      <TextField fx:id="edit1" layoutX="25.0" layoutY="52.0" prefHeight="26.0" prefWidth="322.0" />
+      <TextField fx:id="edit2" layoutX="25.0" layoutY="135.0" prefHeight="26.0" prefWidth="322.0" />
+      <Button fx:id="button" layoutX="25.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="322.0" text="Пошук" />
+   </children>
+</AnchorPane>

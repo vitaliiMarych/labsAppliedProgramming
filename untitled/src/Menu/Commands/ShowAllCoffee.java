@@ -1,6 +1,10 @@
 package Menu.Commands;
 
 import CoffeeVan.CoffeeVan;
+import GUI.PrintWindow;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ShowAllCoffee implements ICommand{
     @Override
@@ -9,11 +13,12 @@ public class ShowAllCoffee implements ICommand{
     }
 
     @Override
-    public void execute() {
-        if (CoffeeVan.getCoffees().isEmpty())
-            System.out.println("Кавовий фургончик пустий...");
+    public void execute() throws IOException {
 
-        else
-            CoffeeVan.getCoffees().forEach(System.out::println);
+        ArrayList<String> arrList = new ArrayList<>();
+        CoffeeVan.getCoffees().forEach(x -> arrList.add(x.toString()));
+
+        PrintWindow.newWindow(arrList, "Show coffee");
+
     }
 }

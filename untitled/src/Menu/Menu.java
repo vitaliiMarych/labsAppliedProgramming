@@ -1,14 +1,15 @@
 package Menu;
 
+import CoffeeVan.CoffeeVan;
 import Menu.Commands.*;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Menu {
     private static Hashtable<String, ICommand> mn = new Hashtable<>();
 
     public static void createMenu(){
-        mn.put("Help", new HelpCoffee(mn));
         mn.put("Add coffee", new AddNewCoffee());
         mn.put("Change info", new ChangeInfoCoffee());
         mn.put("Change status", new ChangeStatusCoffee());
@@ -29,8 +30,17 @@ public class Menu {
 
     }
 
+    public static ArrayList<String> getAllCommands(){
+        return new ArrayList<String>(mn.keySet());
+    }
+
+    public static Hashtable<String, ICommand> getMn() {
+        return mn;
+    }
+
     public static void execute(String command){
         try {
+            CoffeeVan.readLists();
             mn.get(command).execute();
         }
         catch (Exception e) {

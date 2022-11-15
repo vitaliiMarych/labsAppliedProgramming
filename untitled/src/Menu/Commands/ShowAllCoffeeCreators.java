@@ -1,6 +1,10 @@
 package Menu.Commands;
 
 import CoffeeVan.CoffeeVan;
+import CoffeeVan.Coffees.Coffee;
+import GUI.PrintWindow;
+
+import java.util.ArrayList;
 
 public class ShowAllCoffeeCreators implements ICommand{
     @Override
@@ -10,10 +14,9 @@ public class ShowAllCoffeeCreators implements ICommand{
 
     @Override
     public void execute() {
-        if (CoffeeVan.getCreators().isEmpty())
-            System.out.println("Пристроїв для кави нема...");
+        ArrayList<String> arrList = new ArrayList<>();
+        CoffeeVan.getCreators().forEach(x -> arrList.add(x.toString()));
 
-        else
-            CoffeeVan.getCreators().forEach(System.out::println);
+        PrintWindow.newWindow(arrList, "Show creators");
     }
 }

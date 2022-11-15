@@ -2,7 +2,14 @@ package Menu.Commands;
 
 import CoffeeVan.CoffeeVan;
 import CoffeeVan.Coffees.Coffee;
+import GUI.ControllerGetInfo;
 import SafeScans.SafeScans;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class GetInfoCoffee implements ICommand{
     @Override
@@ -11,9 +18,18 @@ public class GetInfoCoffee implements ICommand{
     }
 
     @Override
-    public void execute() {
-        System.out.println("Введіть id кави про яку вам треба дізнатися більше");
-        int id = SafeScans.scanInt();
-        CoffeeVan.getCoffees().stream().filter(x -> x.getId() == id).forEach(x -> System.out.println(x.toStringAllInfo()));
+    public void execute() throws IOException {
+        Stage stage = new Stage();
+
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/GetInfo.fxml"));
+
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.showAndWait();
+
+//        System.out.println("Введіть id кави про яку вам треба дізнатися більше");
+//        int id = SafeScans.scanInt();
+
     }
 }

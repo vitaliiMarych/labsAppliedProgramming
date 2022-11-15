@@ -3,7 +3,12 @@ package Menu.Commands;
 import CoffeeVan.CoffeeVan;
 import CoffeeVan.Coffees.Coffee;
 import SafeScans.SafeScans;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.stream.Stream;
 
 public class FindByTypeCoffee implements ICommand{
@@ -13,14 +18,14 @@ public class FindByTypeCoffee implements ICommand{
     }
 
     @Override
-    public void execute() {
-        System.out.println("Введіть тип(мелена, розчинна, зернова): ");
-        String type = SafeScans.scanLine();
-        Stream<Coffee> stream = CoffeeVan.getCoffees().stream().filter(x -> x.getType().equals(type));
+    public void execute() throws IOException {
+        Stage stage = new Stage();
 
-        if (!stream.findAny().isPresent())
-            System.out.println("Нічого не найдено...");
-        else
-            CoffeeVan.getCoffees().stream().filter(x -> x.getType().equals(type)).forEach(x -> System.out.println(x.toString()));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/FindByTypeW.fxml"));
+
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

@@ -11,7 +11,7 @@ import java.sql.Statement;
 public class AddNewCreator implements  ICommand{
     @Override
     public String getInfoAboutCommand() {
-        return "Add new сreator";
+        return "Добавити новий пристрій";
     }
 
     @Override
