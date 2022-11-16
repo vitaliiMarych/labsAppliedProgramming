@@ -1,5 +1,6 @@
-package GUI;
+package Controllers;
 
+import Logs.LoggerCoffeeVan;
 import Menu.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+
+import java.util.logging.Level;
 
 public class ControllerMain {
 
@@ -27,11 +30,15 @@ public class ControllerMain {
             label.setText(Menu.getMn().get(choiceBox.getValue()).getInfoAboutCommand());
         });
 
-        button.setOnAction(e -> Menu.execute(choiceBox.getValue()));
+        button.setOnAction(event -> {
+            try {
+                LoggerCoffeeVan.getLogger().log(Level.INFO, "Execute command" + choiceBox.getValue());
+                Menu.execute(choiceBox.getValue());
+            }
+            catch (Exception e){
+                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Menu choiceBox problem");
+            }
+        });
 
     }
-
-
-
-
 }

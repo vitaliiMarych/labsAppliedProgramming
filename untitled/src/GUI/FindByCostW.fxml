@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="246.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ControllerFindByCost">
+<AnchorPane prefHeight="246.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerFindByCost">
    <children>
       <Label layoutX="24.0" layoutY="27.0" prefHeight="18.0" prefWidth="322.0" text="Введіть мінімальну ціну" />
       <Label layoutX="24.0" layoutY="110.0" prefHeight="18.0" prefWidth="322.0" text="Введіть максимальну ціну" />

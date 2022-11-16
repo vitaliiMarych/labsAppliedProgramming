@@ -3,7 +3,12 @@ package Menu.Commands;
 import CoffeeVan.CoffeeVan;
 import DataBase.DataBase;
 import SafeScans.SafeScans;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,28 +21,15 @@ public class AddNewCoffee implements ICommand{
     }
 
     @Override
-    public void execute() throws SQLException {
+    public void execute() throws IOException {
+        Stage stage = new Stage();
 
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/AddNewCoffeeW.fxml"));
 
-        System.out.println("Введіть назву кави: ");
-        String name = SafeScans.scanLine();
+        Scene scene = new Scene(root);
 
-        System.out.println("Введіть тип кави(мелена, розчинна, зернова)");
-        String type;
-        do {
-            type = SafeScans.scanLine();
-        } while (!type.equals("мелена") && !type.equals("розчинна") && !type.equals("зернова"));
-
-        System.out.println("Введіть ціну кави");
-        int cost = SafeScans.scanInt();
-
-        System.out.println("Введіть весь об'єм кави, що маєте");
-        double volume = SafeScans.scanDouble(CoffeeVan.getMaxVolume() - CoffeeVan.getCurrentVolume());
-
-        System.out.println("Введіть смачну добавку у цю каву");
-        String recommned = SafeScans.scanLine();
-
-        insertCoffee(DataBase.getMainStatm(), name, type, cost, volume, recommned);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     //inserts

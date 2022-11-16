@@ -2,21 +2,29 @@ package Menu.Commands;
 
 import DataBase.DataBase;
 import SafeScans.SafeScans;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class DeleteCreator implements ICommand{
     @Override
     public String getInfoAboutCommand() {
-        return "Delete creator";
+        return "Видалити пристрій для кави";
     }
 
     @Override
-    public void execute() throws SQLException {
-        System.out.println("Введіть id, яке потрібно видалити");
-        int id = SafeScans.scanInt();
+    public void execute() throws IOException {
+        Stage stage = new Stage();
 
-        String query = "DELETE FROM 'Creators' WHERE id = " + id;
-        DataBase.getMainStatm().executeUpdate(query);
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/DeleteCreatorW.fxml"));
+
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

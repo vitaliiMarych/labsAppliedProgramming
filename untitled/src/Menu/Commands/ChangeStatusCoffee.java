@@ -3,7 +3,12 @@ package Menu.Commands;
 import CoffeeVan.CoffeeVan;
 import DataBase.DataBase;
 import SafeScans.SafeScans;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -14,45 +19,14 @@ public class ChangeStatusCoffee implements ICommand{
     }
 
     @Override
-    public void execute() throws SQLException {
-        System.out.println("Введіть id, яке потрібно змінити");
-        int id = SafeScans.scanInt();
-        if (CoffeeVan.getCreators().stream().noneMatch(x -> x.getId() == id)) {
-            System.out.println("Такого id не знайдено");
-            return;
-        }
+    public void execute() throws IOException {
+        Stage stage = new Stage();
 
-        ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Coffees' WHERE id = " + id + "");
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/ChangeStatusCoffeeW.fxml"));
 
-        System.out.println("Введіть чи можна продавати цю каву(y or n)(next - залишити все як є): ");
-        String buffer;
-        do {
-            buffer = SafeScans.scanLine().toLowerCase();
-        } while (!buffer.equals("n") && !buffer.equals("y") && !buffer.equals("next"));
+        Scene scene = new Scene(root);
 
-        boolean canSell = true;
-        String state = "Можна продавати";
-
-        if ("n".equals(buffer) || "next".equals(buffer)) {
-            System.out.println("Введіть новий стан кави(next - залишити все як є): ");
-            if ("n".equals(buffer)) {
-                canSell = false;
-            } else {
-                canSell = rslt.getBoolean(3);
-            }
-            state = SafeScans.scanLine();
-
-            if ("next".equals(state))
-                state = rslt.getString(5);
-        }
-
-        String query = String.format("UPDATE 'Coffees' " +
-                "SET 'canSell' = '%d', " +
-                "'state' = '%s' " +
-                " WHERE id = %d", canSell ? 1 : 0, state, id);;
-
-        DataBase.getMainStatm().executeUpdate(query);
-
-
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

@@ -1,9 +1,11 @@
 package DataBase;
 
 import CoffeeVan.CoffeeCreators.CoffeeCreator;
+import Logs.LoggerCoffeeVan;
 
 
 import java.sql.*;
+import java.util.logging.Level;
 
 public class DataBase {
 
@@ -15,7 +17,7 @@ public class DataBase {
         Class.forName("org.sqlite.JDBC");
         conn = DriverManager.getConnection("jdbc:sqlite:CoffeeVan.db");
 
-        System.out.println("basaDate connected");
+        LoggerCoffeeVan.getLogger().log(Level.INFO, "Database connected");
     }
 
     //create tables
@@ -71,6 +73,7 @@ public class DataBase {
                 "'state'        VARCHAR (100)   DEFAULT('Все добре')" +
                 ")");
 
+        LoggerCoffeeVan.getLogger().log(Level.INFO, "tables added or already exist");
         existTable.close();
     }
 
@@ -100,7 +103,7 @@ public class DataBase {
         conn.close();
         mainStatm.close();
         secondStatm.close();
-        System.out.println("basaDate closed");
+        LoggerCoffeeVan.getLogger().log(Level.INFO, "database closed");
     }
 
 

@@ -3,10 +3,12 @@ package CoffeeVan;
 import CoffeeVan.CoffeeCreators.CoffeeCreator;
 import CoffeeVan.Coffees.Coffee;
 import DataBase.DataBase;
+import Logs.LoggerCoffeeVan;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class CoffeeVan {
     private static double maxVolume;
@@ -44,22 +46,22 @@ public class CoffeeVan {
 
     private static void readCreatorListFromBD() throws SQLException {
         creators = new ArrayList<>();
-        ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Creators'");
+        ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT Creators.id, type, isWorking, state FROM 'Creators' " +
+                "INNER JOIN 'typesOfCreator' " +
+                "ON Creators.idType = typesOfCreator.id");
 
         while (rslt.next()){
             int id = rslt.getInt(1);
             boolean isWorking = rslt.getBoolean(3);
             String state = rslt.getString(4);
-
-            int idType = rslt.getInt(2);
-            ResultSet typeColumh = DataBase.getTypeOfCreator(DataBase.getSecondStatm(), idType);
-            String type = typeColumh.getString(2);
+            String type = rslt.getString(2);
 
             CoffeeCreator cc = new CoffeeCreator(id, isWorking, state, type);
             creators.add(cc);
         }
         DataBase.getSecondStatm().close();
         DataBase.getMainStatm().close();
+        LoggerCoffeeVan.getLogger().log(Level.INFO, "List creators was read");
     }
 
     private static void readCoffeeListFromDB() throws SQLException {
@@ -136,6 +138,8 @@ public class CoffeeVan {
         DataBase.getConn().setAutoCommit(true);
 
         DataBase.getSecondStatm().close();
+
+        LoggerCoffeeVan.getLogger().log(Level.INFO, "List coffees was read");
     }
 
     public static String toStringe() {

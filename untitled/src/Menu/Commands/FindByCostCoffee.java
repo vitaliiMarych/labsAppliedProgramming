@@ -1,15 +1,13 @@
 package Menu.Commands;
 
-import CoffeeVan.CoffeeVan;
-import CoffeeVan.Coffees.Coffee;
-import SafeScans.SafeScans;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.stream.Stream;
+
 
 public class FindByCostCoffee implements ICommand{
     @Override

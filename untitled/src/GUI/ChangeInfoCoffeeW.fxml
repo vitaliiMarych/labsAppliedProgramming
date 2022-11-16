@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="488.0" prefWidth="473.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ContollerChangeInfoCoffee">
+   <children>
+      <Label layoutX="28.0" layoutY="24.0" prefHeight="18.0" prefWidth="415.0" text="Введіть id, яке потрібно змінити:" />
+      <Label layoutX="28.0" layoutY="142.0" prefHeight="18.0" prefWidth="430.0" text="Введіть новий тип кави (next - залишити все як є)" />
+      <Label layoutX="28.0" layoutY="83.0" prefHeight="18.0" prefWidth="415.0" text="Введіть нову назву кави (next - залишити все як є):" />
+      <Label layoutX="28.0" layoutY="203.0" prefHeight="18.0" prefWidth="415.0" text="Введіть кількість продаж кави (next - залишити все як є)" />
+      <Label layoutX="28.0" layoutY="320.0" prefHeight="18.0" prefWidth="415.0" text="Введіть новий об'єм кави, що маєте(next - залишити все як є)" />
+      <Label layoutX="28.0" layoutY="260.0" prefHeight="18.0" prefWidth="415.0" text="Введіть нову ціну кави (next - залишити все як є)" />
+      <ChoiceBox fx:id="choiceBox" layoutX="28.0" layoutY="160.0" prefHeight="26.0" prefWidth="415.0" />
+      <TextField fx:id="edit1" layoutX="28.0" layoutY="42.0" prefHeight="26.0" prefWidth="415.0" />
+      <TextField fx:id="edit2" layoutX="28.0" layoutY="101.0" prefHeight="26.0" prefWidth="415.0" />
+      <TextField fx:id="edit3" layoutX="28.0" layoutY="220.0" prefHeight="26.0" prefWidth="415.0" />
+      <TextField fx:id="edit4" layoutX="28.0" layoutY="278.0" prefHeight="26.0" prefWidth="415.0" />
+      <TextField fx:id="edit5" layoutX="28.0" layoutY="338.0" prefHeight="26.0" prefWidth="415.0" />
+      <Button fx:id="button" layoutX="28.0" layoutY="447.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="415.0" text="Змінити" />
+      <TextField fx:id="edit6" layoutX="28.0" layoutY="398.0" prefHeight="26.0" prefWidth="415.0" />
+      <Label layoutX="28.0" layoutY="380.0" prefHeight="18.0" prefWidth="415.0" text="Введіть нову смачну добавку у цю каву" />
+   </children>
+</AnchorPane>

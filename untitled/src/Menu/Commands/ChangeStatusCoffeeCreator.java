@@ -3,7 +3,12 @@ package Menu.Commands;
 import CoffeeVan.CoffeeVan;
 import DataBase.DataBase;
 import SafeScans.SafeScans;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -14,43 +19,14 @@ public class ChangeStatusCoffeeCreator implements ICommand{
     }
 
     @Override
-    public void execute() throws SQLException {
-        System.out.println("Введіть id, яке потрібно змінити");
-        int id = SafeScans.scanInt();
-        if (CoffeeVan.getCoffees().stream().noneMatch(x -> x.getId() == id)) {
-            System.out.println("Такого id не знайдено");
-            return;
-        }
+    public void execute() throws IOException {
+        Stage stage = new Stage();
 
-        ResultSet rslt = DataBase.getMainStatm().executeQuery("SELECT * FROM 'Creators' WHERE id = " + id + "");
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("GUI/ChangeStatusCoffeeCreatorW.fxml"));
 
-        System.out.println("Введіть чи працює цей пристрій(y or n)(next - залишити все як є): ");
-        String buffer;
-        do {
-            buffer = SafeScans.scanLine().toLowerCase();
-        } while (!buffer.equals("n") && !buffer.equals("y") && !buffer.equals("next"));
+        Scene scene = new Scene(root);
 
-        boolean isWorking = true;
-        String state = "Все добре";
-
-        if ("n".equals(buffer) || "next".equals(buffer)) {
-            System.out.println("Введіть новий стан пристроя(next - залишити все як є): ");
-            if ("n".equals(buffer)) {
-                isWorking = false;
-            } else {
-                isWorking = rslt.getBoolean(3);
-            }
-            state = SafeScans.scanLine();
-
-            if ("next".equals(state))
-                state = rslt.getString(5);
-        }
-
-        String query = String.format("UPDATE 'Creators' " +
-                "SET 'canSell' = '%d', " +
-                "'state' = '%s' " +
-                " WHERE id = %d", isWorking ? 1 : 0, state, id);;
-
-        DataBase.getMainStatm().executeUpdate(query);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

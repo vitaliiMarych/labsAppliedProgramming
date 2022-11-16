@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="134.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ConrollerFindByName">
+<AnchorPane prefHeight="134.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ConrollerFindByName">
    <children>
       <Label layoutX="33.0" layoutY="27.0" prefHeight="18.0" prefWidth="274.0" text="Введіть назву кави або її частинку:" />
       <Button fx:id="button" layoutX="33.0" layoutY="83.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="274.0" text="Пошук" />
