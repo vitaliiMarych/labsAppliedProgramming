@@ -21,6 +21,7 @@ public class CoffeeVan {
         name = n;
         maxVolume = volume;
         creators = new ArrayList<>();
+        LoggerCoffeeVan.getLogger().log(Level.INFO, "coffeeVan created");
     }
 
     public static double getMaxVolume() {

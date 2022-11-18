@@ -36,7 +36,7 @@ public class ControllerMain {
                 Menu.execute(choiceBox.getValue());
             }
             catch (Exception e){
-                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Menu choiceBox problem");
+                LoggerCoffeeVan.getLogger().severe("Menu choiceBox problem");
             }
         });
 

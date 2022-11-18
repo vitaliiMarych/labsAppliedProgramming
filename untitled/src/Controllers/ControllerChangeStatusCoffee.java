@@ -3,6 +3,7 @@ package Controllers;
 
 import DataBase.DataBase;
 import Logs.LoggerCoffeeVan;
+import Menu.Commands.ChangeStatusCoffee;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -42,12 +43,7 @@ public class ControllerChangeStatusCoffee {
                 else
                     state = edit3.getText();
 
-                String query = String.format("UPDATE 'Coffees' " +
-                        "SET 'canSell' = '%d', " +
-                        "'state' = '%s' " +
-                        " WHERE id = %d", canSell ? 1 : 0, state, id);;
-
-                DataBase.getMainStatm().executeUpdate(query);
+                ChangeStatusCoffee.changeStatus(id, canSell, state);
                 LoggerCoffeeVan.getLogger().log(Level.INFO, "Changed status coffee");
             }
             catch (Exception e){
@@ -55,7 +51,7 @@ public class ControllerChangeStatusCoffee {
                 alert.setTitle("Exception");
                 alert.setContentText("Проблема з введенням");
                 alert.showAndWait();
-                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Input problem");
+                LoggerCoffeeVan.getLogger().severe("Input problem");
             }
 
         });

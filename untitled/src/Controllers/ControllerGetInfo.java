@@ -45,7 +45,7 @@ public class ControllerGetInfo {
             }
             catch (Exception e){
                 text.append("Помилка при введенні");
-                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Input problem");
+                LoggerCoffeeVan.getLogger().severe("Input problem");
             }
 
             label.setText(text.toString());

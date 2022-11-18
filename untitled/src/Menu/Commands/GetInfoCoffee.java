@@ -24,8 +24,6 @@ public class GetInfoCoffee implements ICommand{
         stage.setScene(scene);
         stage.showAndWait();
 
-//        System.out.println("Введіть id кави про яку вам треба дізнатися більше");
-//        int id = SafeScans.scanInt();
 
     }
 }

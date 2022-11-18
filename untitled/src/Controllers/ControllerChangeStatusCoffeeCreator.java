@@ -55,7 +55,7 @@ public class ControllerChangeStatusCoffeeCreator {
                 alert.setTitle("Exception");
                 alert.setContentText("Проблема з введенням");
                 alert.showAndWait();
-                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Input problem");
+                LoggerCoffeeVan.getLogger().severe("Input problem");
             }
 
         });

@@ -6,7 +6,6 @@ import GUI.PrintWindow;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class SortCoffee implements ICommand{

@@ -3,6 +3,7 @@ package CoffeeVan.Coffees;
 import CoffeeVan.CoffeeCreators.CoffeeCreator;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Coffee implements Comparable<Coffee>{
     protected int id;
@@ -47,6 +48,18 @@ public class Coffee implements Comparable<Coffee>{
         return this.getCost() - o.getCost();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Coffee))
+            return false;
+
+        Coffee coffee = (Coffee) obj;
+        if (this.name.equals(coffee.name) && this.cost == coffee.cost && this.type.equals(coffee.type) && this.recomendAdditive.equals(coffee.recomendAdditive)){
+                return true;
+        }
+        return false;
+    }
+
     //other funct
     public String toStringAllInfo() {
         return  "Кава " + type + " - " + name + "\n" +
@@ -82,6 +95,14 @@ public class Coffee implements Comparable<Coffee>{
 
     public String getName() {
         return name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getRecomendAdditive() {
+        return recomendAdditive;
     }
 }
 

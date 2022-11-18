@@ -1,5 +1,7 @@
 package CoffeeVan.CoffeeCreators;
 
+import CoffeeVan.Coffees.Coffee;
+
 public class CoffeeCreator {
     private int id;
     private boolean Working;  //чи працює
@@ -25,11 +27,22 @@ public class CoffeeCreator {
         return id;
     }
 
+    public String getState() {
+        return state;
+    }
+
     @Override
     public String toString() {
         return String.format("%d) %s, працює - %b, стан - %s", id, type, Working, state);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CoffeeCreator))
+            return false;
 
+        CoffeeCreator cr = (CoffeeCreator) obj;
+        return this.type.equals(cr.type) && this.Working == cr.Working;
+    }
     //coffeeMug, coffeeMachine, Kettle
 }

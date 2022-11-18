@@ -1,7 +1,6 @@
 package Menu.Commands;
 
 import CoffeeVan.CoffeeVan;
-import CoffeeVan.Coffees.Coffee;
 import GUI.PrintWindow;
 
 import java.util.ArrayList;

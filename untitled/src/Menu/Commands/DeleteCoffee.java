@@ -1,7 +1,6 @@
 package Menu.Commands;
 
 import DataBase.DataBase;
-import SafeScans.SafeScans;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,5 +26,10 @@ public class DeleteCoffee implements ICommand{
         stage.setScene(scene);
         stage.showAndWait();
 
+    }
+
+    public static void deleteCoffee(int id) throws SQLException {
+        String query = "DELETE FROM 'Coffees' WHERE id = " + id;
+        DataBase.getMainStatm().executeUpdate(query);
     }
 }

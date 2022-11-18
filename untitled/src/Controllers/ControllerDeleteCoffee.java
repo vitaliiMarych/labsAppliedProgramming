@@ -2,6 +2,7 @@ package Controllers;
 
 import DataBase.DataBase;
 import Logs.LoggerCoffeeVan;
+import Menu.Commands.DeleteCoffee;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -22,8 +23,7 @@ public class ControllerDeleteCoffee {
             try {
                 int id = Integer.parseInt(edit.getText());
 
-                String query = "DELETE FROM 'Coffees' WHERE id = " + id;
-                DataBase.getMainStatm().executeUpdate(query);
+                DeleteCoffee.deleteCoffee(id);
                 LoggerCoffeeVan.getLogger().log(Level.INFO, "Coffee was deleted");
             }
             catch (Exception e){
@@ -31,7 +31,7 @@ public class ControllerDeleteCoffee {
                 alert.setTitle("Exception");
                 alert.setContentText("Проблема з введенням");
                 alert.showAndWait();
-                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Input problem");
+                LoggerCoffeeVan.getLogger().severe("Input problem");
             }
         });
     }

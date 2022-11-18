@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.logging.Level;
 
 public class Program extends Application {
     private static DecimalFormat df = new DecimalFormat();
@@ -27,10 +26,8 @@ public class Program extends Application {
         df.setDecimalFormatSymbols(dfs);
 
         LoggerCoffeeVan.createLogger();
-
         DataBase.connection();
         DataBase.createTable();
-
         Menu.createMenu();
         CoffeeVan.start("Vitalik coffee", 50000.0);
 

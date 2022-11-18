@@ -1,16 +1,11 @@
 package Menu.Commands;
 
-import CoffeeVan.CoffeeVan;
-import DataBase.DataBase;
-import SafeScans.SafeScans;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class ChangeStatusCoffeeCreator implements ICommand{
     @Override

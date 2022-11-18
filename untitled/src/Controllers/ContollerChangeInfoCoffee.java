@@ -1,10 +1,9 @@
 package Controllers;
 
-import CoffeeVan.CoffeeVan;
 import DataBase.DataBase;
 import Logs.LoggerCoffeeVan;
 import MainPackage.Program;
-import SafeScans.SafeScans;
+import Menu.Commands.ChangeInfoCoffee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -108,16 +107,8 @@ public class ContollerChangeInfoCoffee {
 
                 String recommned = edit6.getText();
 
-                String query = String.format("UPDATE 'Coffees' " +
-                        "SET 'name' = '%s', " +
-                        "'idType' = %d, " +
-                        "'countOfSell' = %d, " +
-                        "'cost' = %d, " +
-                        "'volume' = " + volume +
-                        ", 'recommendAdd' = '%s'" +
-                        " WHERE id = %d", name, typeId, count, cost, recommned, id);
+                ChangeInfoCoffee.changeInfo(id, name, typeId, count,cost,volume,recommned);
 
-                DataBase.getMainStatm().executeUpdate(query);
                 LoggerCoffeeVan.getLogger().log(Level.INFO, "Changed info about coffee");
             }
             catch (Exception e){
@@ -125,7 +116,7 @@ public class ContollerChangeInfoCoffee {
                 alert.setTitle("Exception");
                 alert.setContentText("Проблема з введенням");
                 alert.showAndWait();
-                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Input problem");
+                LoggerCoffeeVan.getLogger().severe("Input problem");
             }
         });
 

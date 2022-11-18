@@ -4,13 +4,11 @@ import CoffeeVan.CoffeeVan;
 import DataBase.DataBase;
 import Logs.LoggerCoffeeVan;
 import MainPackage.Program;
-import SafeScans.SafeScans;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.sql.ResultSet;
 import java.util.logging.Level;
 
 import static Menu.Commands.AddNewCoffee.insertCoffee;
@@ -81,7 +79,7 @@ public class ControllerAddNewCoffee {
                 alert.setTitle("Exception");
                 alert.setContentText("Проблема з введенням");
                 alert.showAndWait();
-                LoggerCoffeeVan.getLogger().log(Level.WARNING, "Input problem");
+                LoggerCoffeeVan.getLogger().severe("Input problem");
             }
         });
 

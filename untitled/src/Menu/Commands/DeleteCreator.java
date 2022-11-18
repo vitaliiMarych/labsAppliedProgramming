@@ -1,7 +1,6 @@
 package Menu.Commands;
 
 import DataBase.DataBase;
-import SafeScans.SafeScans;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,5 +25,10 @@ public class DeleteCreator implements ICommand{
 
         stage.setScene(scene);
         stage.showAndWait();
+    }
+
+    public static void deleteCreator(int id) throws SQLException {
+        String query = "DELETE FROM 'Creators' WHERE id = " + id;
+        DataBase.getMainStatm().executeUpdate(query);
     }
 }

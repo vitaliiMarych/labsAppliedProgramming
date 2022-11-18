@@ -1,7 +1,5 @@
 package Menu.Commands;
 
-import CoffeeVan.CoffeeVan;
-import SafeScans.SafeScans;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
