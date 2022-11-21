@@ -3,6 +3,7 @@ package Controllers;
 import CoffeeVan.CoffeeVan;
 import GUI.PrintWindow;
 import Logs.LoggerCoffeeVan;
+import Menu.Commands.FindByNameCoffee;
 import Menu.Menu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,11 +26,7 @@ public class ConrollerFindByName {
 
         button.setOnAction(event -> {
             String partOfName = edit.getText();
-            ArrayList<String> arrayList = new ArrayList<>();
-
-            CoffeeVan.getCoffees().stream().filter(
-                    x -> x.getName().toLowerCase().contains(partOfName.toLowerCase())
-            ).forEach(x -> arrayList.add(x.toString()));
+            ArrayList<String> arrayList = FindByNameCoffee.getFindByNameArr(partOfName);
 
             PrintWindow.newWindow(arrayList, "Finded coffees");
             LoggerCoffeeVan.getLogger().log(Level.INFO, "Find coffee");

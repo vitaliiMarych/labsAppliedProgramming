@@ -10,6 +10,7 @@ import Menu.Menu;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -157,5 +158,115 @@ class tests {
         int count2 = CoffeeVan.getCreators().size();
 
         assertEquals(count1, count2);
+    }
+
+    @Test
+    void getSortArr() throws SQLException, ClassNotFoundException {
+        LoggerCoffeeVan.createLogger();
+        DataBase.connection();
+        DataBase.createTable();
+        Menu.createMenu();
+        CoffeeVan.start("Vitalik coffee", 50000.0);
+        CoffeeVan.readLists();
+
+        assertTrue(SortCoffee.getSortArr().size() > 0);
+    }
+
+    @Test
+    void getAvaibleArr() throws SQLException, ClassNotFoundException {
+        LoggerCoffeeVan.createLogger();
+        DataBase.connection();
+        DataBase.createTable();
+        Menu.createMenu();
+        CoffeeVan.start("Vitalik coffee", 50000.0);
+        CoffeeVan.readLists();
+
+        assertTrue(ShowCoffeeAvaible.getAvaibleArr().size() > 0);
+    }
+
+    @Test
+    void getCreatorsArr() throws SQLException, ClassNotFoundException {
+        LoggerCoffeeVan.createLogger();
+        DataBase.connection();
+        DataBase.createTable();
+        Menu.createMenu();
+        CoffeeVan.start("Vitalik coffee", 50000.0);
+        CoffeeVan.readLists();
+
+        assertTrue(ShowAllCoffeeCreators.getCreatorsArr().size() > 0);
+    }
+
+    @Test
+    void getCoffeeArr() throws SQLException, ClassNotFoundException {
+        DataBase.connection();
+        DataBase.createTable();
+        Menu.createMenu();
+        CoffeeVan.start("Vitalik coffee", 50000.0);
+        CoffeeVan.readLists();
+
+        assertTrue(ShowAllCoffee.getCoffeeArr().size() > 0);
+    }
+
+    @Test
+    void getFindByTypeArr() throws SQLException, ClassNotFoundException {
+        LoggerCoffeeVan.createLogger();
+        DataBase.connection();
+        DataBase.createTable();
+        Menu.createMenu();
+        CoffeeVan.start("Vitalik coffee", 50000.0);
+        CoffeeVan.readLists();
+
+        AddNewCoffee.insertCoffee(DataBase.getMainStatm(), "name", "мелена", 1,1.1,"rrr");
+        CoffeeVan.readLists();
+
+        int size = CoffeeVan.getCoffees().size() - 1;
+        int id = CoffeeVan.getCoffees().get(size).getId();
+
+        ArrayList<String> arrayList = FindByTypeCoffee.getFindByTypeArr("мелена");
+        DeleteCoffee.deleteCoffee(id);
+
+        assertTrue(arrayList.size() > 0);
+
+    }
+
+    @Test
+    void getFindByCostArr() throws SQLException, ClassNotFoundException {
+        LoggerCoffeeVan.createLogger();
+        DataBase.connection();
+        DataBase.createTable();
+        Menu.createMenu();
+        CoffeeVan.start("Vitalik coffee", 50000.0);
+        CoffeeVan.readLists();
+
+        AddNewCoffee.insertCoffee(DataBase.getMainStatm(), "name", "мелена", 10000,1.1,"rrr");
+        CoffeeVan.readLists();
+
+        int size = CoffeeVan.getCoffees().size() - 1;
+        int id = CoffeeVan.getCoffees().get(size).getId();
+
+        ArrayList<String> arrayList = FindByCostCoffee.getFindByCostArr(10000,10001);
+        DeleteCoffee.deleteCoffee(id);
+        assertTrue(arrayList.size() > 0);
+    }
+
+
+    @Test
+    void getFindByNameArr() throws SQLException, ClassNotFoundException {
+        LoggerCoffeeVan.createLogger();
+        DataBase.connection();
+        DataBase.createTable();
+        Menu.createMenu();
+        CoffeeVan.start("Vitalik coffee", 50000.0);
+        CoffeeVan.readLists();
+
+        AddNewCoffee.insertCoffee(DataBase.getMainStatm(), "name", "мелена", 1,1.1,"rrr");
+        CoffeeVan.readLists();
+
+        int size = CoffeeVan.getCoffees().size() - 1;
+        int id = CoffeeVan.getCoffees().get(size).getId();
+
+        ArrayList<String> arrayList = FindByNameCoffee.getFindByNameArr("na");
+        DeleteCoffee.deleteCoffee(id);
+        assertTrue(arrayList.size() > 0);
     }
 }

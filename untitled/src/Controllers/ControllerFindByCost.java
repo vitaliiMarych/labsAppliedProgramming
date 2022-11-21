@@ -3,6 +3,7 @@ package Controllers;
 import CoffeeVan.CoffeeVan;
 import GUI.PrintWindow;
 import Logs.LoggerCoffeeVan;
+import Menu.Commands.FindByCostCoffee;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -29,7 +30,7 @@ public class ControllerFindByCost {
                 int min = Integer.parseInt(edit1.getText());
                 int max = Integer.parseInt(edit2.getText());
 
-                CoffeeVan.getCoffees().stream().filter(x -> x.getCost() <= max && x.getCost() >= min).forEach(x -> arrayList.add(x.toString()));
+                arrayList = FindByCostCoffee.getFindByCostArr(min,max);
                 PrintWindow.newWindow(arrayList, "Finded coffees");
                 LoggerCoffeeVan.getLogger().log(Level.INFO, "Find coffee");
 

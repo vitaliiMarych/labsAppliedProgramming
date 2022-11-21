@@ -15,10 +15,16 @@ public class ShowAllCoffee implements ICommand{
     @Override
     public void execute() throws IOException {
 
-        ArrayList<String> arrList = new ArrayList<>();
-        CoffeeVan.getCoffees().forEach(x -> arrList.add(x.toString()));
+        ArrayList<String> arrList = getCoffeeArr();
 
         PrintWindow.newWindow(arrList, "Show coffee");
 
+    }
+
+    public static ArrayList<String> getCoffeeArr(){
+        ArrayList<String> arrList = new ArrayList<>();
+        CoffeeVan.getCoffees().forEach(x -> arrList.add(x.toString()));
+
+        return arrList;
     }
 }

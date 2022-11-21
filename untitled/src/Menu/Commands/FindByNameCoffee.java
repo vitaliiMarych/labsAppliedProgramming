@@ -1,11 +1,13 @@
 package Menu.Commands;
 
+import CoffeeVan.CoffeeVan;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FindByNameCoffee implements ICommand{
     @Override
@@ -26,6 +28,14 @@ public class FindByNameCoffee implements ICommand{
 
     }
 
+    public static ArrayList<String> getFindByNameArr(String name){
+        ArrayList<String> arrayList = new ArrayList<>();
 
+        CoffeeVan.getCoffees().stream().filter(
+                x -> x.getName().toLowerCase().contains(name.toLowerCase())
+        ).forEach(x -> arrayList.add(x.toString()));
+
+        return arrayList;
+    }
 
 }

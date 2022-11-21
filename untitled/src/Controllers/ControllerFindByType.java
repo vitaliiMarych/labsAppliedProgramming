@@ -3,6 +3,7 @@ package Controllers;
 import CoffeeVan.CoffeeVan;
 import GUI.PrintWindow;
 import Logs.LoggerCoffeeVan;
+import Menu.Commands.FindByTypeCoffee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,8 +28,7 @@ public class ControllerFindByType {
 
 
         button.setOnAction(event -> {
-            ArrayList<String> arrayList = new ArrayList<>();
-            CoffeeVan.getCoffees().stream().filter(x -> x.getType().equals(comboBox.getValue())).forEach(x -> arrayList.add(x.toString()));
+            ArrayList<String> arrayList = FindByTypeCoffee.getFindByTypeArr(comboBox.getValue());
             PrintWindow.newWindow(arrayList, "Finded coffees");
             LoggerCoffeeVan.getLogger().log(Level.INFO, "Find coffee");
         });

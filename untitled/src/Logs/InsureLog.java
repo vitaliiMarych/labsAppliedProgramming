@@ -58,7 +58,6 @@ public class InsureLog {
             Transport.send(message);
         } catch (MessagingException e) {
             Logger.getGlobal().severe("Failed to send email.");
-            e.printStackTrace();
         }
     }
 }

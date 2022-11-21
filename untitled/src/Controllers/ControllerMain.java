@@ -32,6 +32,9 @@ public class ControllerMain {
 
         button.setOnAction(event -> {
             try {
+                if (choiceBox.getValue() == null)
+                    throw new Exception();
+
                 LoggerCoffeeVan.getLogger().log(Level.INFO, "Execute command" + choiceBox.getValue());
                 Menu.execute(choiceBox.getValue());
             }

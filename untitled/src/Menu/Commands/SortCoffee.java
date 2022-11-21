@@ -16,10 +16,14 @@ public class SortCoffee implements ICommand{
 
     @Override
     public void execute() throws IOException {
+        ArrayList<String> arrList = getSortArr();
+        PrintWindow.newWindow(arrList, "Sort coffee");
+    }
+
+    public static ArrayList<String> getSortArr(){
         Collections.sort(CoffeeVan.getCoffees());
         ArrayList<String> arrList = new ArrayList<>();
         CoffeeVan.getCoffees().forEach(x -> arrList.add(x.toString()));
-
-        PrintWindow.newWindow(arrList, "Sort coffee");
+        return arrList;
     }
 }
